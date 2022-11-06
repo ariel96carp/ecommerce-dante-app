@@ -1,3 +1,23 @@
+import productImage1 from '../../img/c1.jpg'
+import productImage2 from '../../img/c2.jpg'
+import productImage3 from '../../img/c3.jpg'
+import productImage4 from '../../img/c4.jpg'
+import productImage5 from '../../img/c5.jpg'
+import productImage6 from '../../img/c6.jpg'
+import productImage7 from '../../img/c7.jpg'
+import productImage8 from '../../img/c8.jpg'
+import productImage9 from '../../img/n1.jpg'
+import productImage10 from '../../img/n2.jpg'
+import productImage11 from '../../img/n3.jpg'
+import productImage12 from '../../img/n4.jpg'
+import productImage13 from '../../img/n5.jpg'
+import productImage14 from '../../img/n6.jpg'
+import productImage15 from '../../img/n7.jpg'
+import productImage16 from '../../img/n8.jpg'
+import blogImage1 from '../../img/z1.jpg'
+import blogImage2 from '../../img/z4.jpg'
+import blogImage3 from '../../img/z6.jpg'
+
 const initalState = {
     products: [
         {
@@ -6,7 +26,7 @@ const initalState = {
             enterprise: 'Adidas',
             reviews: 5,
             price: 135,
-            url: './img/c1.jpg',
+            url: productImage1,
             type: 'featured',
             description: "The Adicolor 70s collection draws heavily on archival silhouettes and classics. Undeniably \
             adidas, the detail-oriented range combines luxurious and textural materials with a bright color palette to \
@@ -21,7 +41,7 @@ const initalState = {
             enterprise: 'Louis Vuitton',
             reviews: 3,
             price: 210,
-            url: './img/c2.jpg',
+            url: productImage2,
             type: 'featured',
             description: "When groups say they want a custom t-shirt, what they're talking about is this Gildan Ultra \
             Cotton T‑shirt. This is basically the epitome of tees, which is why year-after-year it's one of our most \
@@ -38,7 +58,7 @@ const initalState = {
             enterprise: 'Nike',
             reviews: 5,
             price: 308,
-            url: 'img/c3.jpg',
+            url: productImage3,
             type: 'featured',
             description: "No need to overcomplicate things — this adidas t-shirt is all about ease. Keep your vibe real, \
             real chill with the understated look. Though it doesn't give into full minimalism. The comfort goes all out, \
@@ -50,7 +70,7 @@ const initalState = {
             enterprise: 'Reebok',
             reviews: 4,
             price: 105,
-            url: 'img/c4.jpg',
+            url: productImage4,
             type: 'featured',
             description: "Let everyone know that sport is your thing. With a Trefoil on the chest and high-contrast \
             3-Stripes, this adidas t-shirt is a timeless classic and closet staple. Wear it as an everyday look for \
@@ -63,7 +83,7 @@ const initalState = {
             enterprise: 'Zara',
             reviews: 2,
             price: 78,
-            url: 'img/c5.jpg',
+            url: productImage5,
             type: 'featured',
             description: "Adicolor has set the standard for bold colours and a simple approach since 1983. This adidas \
             t-shirt keeps that same intent alive. A slim fit and ribbing on the crewneck and cuffs add comfort to the \
@@ -77,7 +97,7 @@ const initalState = {
             enterprise: 'Dior',
             reviews: 5,
             price: 100,
-            url: 'img/c6.jpg',
+            url: productImage6,
             type: 'featured',
             description: "Street style all day, every day. Even when it comes to the basics. This long sleeve tee gets \
             a full makeover with adidas details. A signature Trefoil. Iconic 3-Stripes down the arms. Soft cotton keeps \
@@ -90,7 +110,7 @@ const initalState = {
             enterprise: 'Adidas',
             reviews: 5,
             price: 405,
-            url: 'img/c7.jpg',
+            url: productImage7,
             type: 'featured',
             description: "When groups say they want a custom t-shirt, what they're talking about is this Gildan Ultra \
             Cotton T‑shirt. This is basically the epitome of tees, which is why year-after-year it's one of our most \
@@ -107,7 +127,7 @@ const initalState = {
             enterprise: 'Prada',
             reviews: 4,
             price: 350,
-            url: 'img/c8.jpg',
+            url: productImage8,
             type: 'featured',
             description: "Simplicity is all about comfort, and this adidas t-shirt is all about you. With a puff-print \
             Trefoil and 3-Stripes, it has a subtle, eye-catching design that's also beautifully restrained. A loose \
@@ -121,7 +141,7 @@ const initalState = {
             enterprise: 'Chanel',
             reviews: 4,
             price: 280,
-            url: 'img/n1.jpg',
+            url: productImage9,
             type: 'arrived',
             description: "Classic camo gets a fresh update with this adidas 3-Stripes Camo Tee. The design adds an \
             unexpected twist to the shoulders to bring a little diversity to your daily tee. Soft cotton makes it \
@@ -133,7 +153,7 @@ const initalState = {
             enterprise: 'Valenciaga',
             reviews: 3,
             price: 120,
-            url: 'img/n2.jpg',
+            url: productImage10,
             type: 'arrived',
             description: "Sometimes you just have to keep things simple. No fuss. Easy. Enter this adidas t-shirt. \
             It's one step up from completely minimalist, since there's the bold, contrast adidas graphic that flashes \
@@ -146,7 +166,7 @@ const initalState = {
             enterprise: 'Adidas',
             reviews: 5,
             price: 300,
-            url: 'img/n3.jpg',
+            url: productImage11,
             type: 'arrived',
             description: "You'd be right to think that this adidas t-shirt has a completely retro look to it. It's \
             because its inspiration comes straight form the archives. A celebration of the iconic Trefoil, a swirling \
@@ -158,7 +178,7 @@ const initalState = {
             enterprise: 'Gucci',
             reviews: 4,
             price: 123,
-            url: 'img/n4.jpg',
+            url: productImage12,
             type: 'arrived',
             description: "Adicolor has set the standard for bold colours and a simple approach since 1983. This adidas \
             t-shirt keeps that same intent alive. A slim fit and ribbing on the crewneck and cuffs add comfort to the \
@@ -172,7 +192,7 @@ const initalState = {
             enterprise: 'Adidas',
             reviews: 3,
             price: 225,
-            url: 'img/n5.jpg',
+            url: productImage13,
             type: 'arrived',
             description: "Mountains. You climb them. You admire them. And if you live near them, you use them to orient \
             yourself on the compass rose. This adidas Terrex t-shirt pays homage to these geological wonders. This \
@@ -185,7 +205,7 @@ const initalState = {
             enterprise: 'Moncler',
             reviews: 3,
             price: 185,
-            url: 'img/n6.jpg',
+            url: productImage14,
             type: 'arrived',
             description: "Comfortably transition from the gym to the street with ease. These adidas shorts feature \
             AEROREADY construction, which absorbs moisture and keeps you dry. Classic 3-Stripes styling runs from hip \
@@ -198,7 +218,7 @@ const initalState = {
             enterprise: 'Ralph Lauren',
             reviews: 5,
             price: 78,
-            url: 'img/n7.jpg',
+            url: productImage15,
             type: 'arrived',
             description: "You'd be right to think that this adidas t-shirt has a completely retro look to it. It's \
             because its inspiration comes straight form the archives. A celebration of the iconic Trefoil, a swirling \
@@ -210,7 +230,7 @@ const initalState = {
             enterprise: 'Nike',
             reviews: 4,
             price: 110,
-            url: 'img/n8.jpg',
+            url: productImage16,
             type: 'arrived',
             description: "Classic camo gets a fresh update with this adidas 3-Stripes Camo Tee. The design adds an \
             unexpected twist to the shoulders to bring a little diversity to your daily tee. Soft cotton makes it \
@@ -221,7 +241,7 @@ const initalState = {
         {
             id: 1,
             date: '12/04',
-            url: 'img/z1.jpg',
+            url: blogImage1,
             title: 'The Cotton-Jersey Zip-Up Hoodie',
             description: 'Kinkstarter main braid godard coloring book. Raclette waistcoat selfies yr walf \
             chartreuse hexagon irony godard.'
@@ -229,7 +249,7 @@ const initalState = {
         {
             id: 2,
             date: '16/04',
-            url: 'img/z4.jpg',
+            url: blogImage2,
             title: 'Runaway-Inspired Trends',
             description: 'Kinkstarter main braid godard coloring book. Raclette waistcoat selfies yr walf \
             chartreuse hexagon irony godard.'
@@ -237,7 +257,7 @@ const initalState = {
         {
             id: 3,
             date: '28/06',
-            url: 'img/z6.jpg',
+            url: blogImage3,
             title: 'AW30 Menswear Trends',
             description: 'Kinkstarter main braid godard coloring book. Raclette waistcoat selfies yr walf \
             chartreuse hexagon irony godard.'
