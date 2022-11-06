@@ -154,7 +154,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     setCart(initialState)
                     sessionStorage.setItem('products', JSON.stringify(initialState))
                     const successTemplate = document.getElementById('success-alert').content
+                    const successLogo = successTemplate.querySelector('.logo')
                     const successPayment = successTemplate.querySelector('.payment')
+                    successLogo.src = `${new URL('../img/logo2.png', import.meta.url).href}`
                     successPayment.textContent = `You paid $${saleTotals} in an installment of: $${saleTotals.toFixed(2)}`
                     const successClon = successTemplate.cloneNode(true)
                     status.replaceChildren(successClon)
