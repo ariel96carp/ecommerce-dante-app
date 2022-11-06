@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+  <script type="module" crossorigin src="/assets/contact.78bed919.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/script.83c20f37.js">
+  <link rel="modulepreload" crossorigin href="/assets/closeModal.5c9c7dbf.js">
+  <link rel="stylesheet" href="/assets/script.4de1442f.css">
+</head>
+<body>
+    <template id="loader">
+        <div 
+            class="w-28 h-28 rounded-full border-2 border-t-2 border-t-sky-400 border-gray-400 animate-spin"
+        ></div>
+    </template>
+    <template id="success-alert">
+        <div 
+            class="w-full sm:w-[70%] md:w-[50%] lg:w-[35%] bg-white rounded-md shadow-md p-10 text-gray-500 relative animate-translate-slow"
+        >
+            <img src="img/logo.png" alt="Cara Logo" class="mb-10">
+            <div class="text-center">
+                <h2 class="text-5xl font-medium tracking-wide mb-2">Thank you!</h2>
+                <p class="text-lg mb-12">Your details has been succesfully submited. Thanks!</p>
+                <button 
+                    type="button" 
+                    class="bg-[#6fd649] text-white font-medium p-2 rounded-sm w-full shadow-md"
+                    id="modal-button"
+                >
+                    OK
+                </button>
+            </div>
+            <img 
+                src="img/404-tick.png" 
+                alt="Check" 
+                class="absolute bottom-full left-1/2 w-24 check-image"
+            >
+        </div>
+    </template>
+    <template id="cart-quantity">
+        <div 
+            class="absolute bottom-[70%] left-[80%] bg-red-400 w-4 h-4 text-xs text-white rounded-full text-center quantity"
+        ></div>
+    </template>
+    <header class="fixed top-0 left-0 w-full h-[var(--header-size)] z-40 bg-ca-sky-light shadow-md">
+        <div class="page-container flex justify-between items-center h-full">
+            <a href="index.html">
+                <img src="/assets/logo.152e4e9b.png" alt="Logo de Cara" class="w-[7rem]">
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex gap-8 items-center font-medium text-gray-600">
+                    <li><a href="index.html" class="menu-link menu-item">Home</a></li>
+                    <li><a href="shop.html" class="menu-link menu-item">Shop</a></li>
+                    <li><a href="blog.html" class="menu-link menu-item">Blog</a></li>
+                    <li><a href="about.html" class="menu-link menu-item">About</a></li>
+                    <li><a href="contact.html" class="menu-link menu-item active">Contact</a></li>
+                    <li class="relative" id="cart-link">
+                        <a href="cart.html" class="menu-link menu-item after:w-full">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                stroke-width="1.5" 
+                                stroke="currentColor" 
+                                class="w-5 h-5"
+                            >
+                                <path 
+                                    stroke-linecap="round" 
+                                    stroke-linejoin="round" 
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" 
+                                />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="md:hidden flex items-center gap-4">
+                <a href="cart.html" class="menu-link menu-item after:w-full">
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="w-5 h-5"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" 
+                        />
+                    </svg>
+                </a>
+                <button class="menu-button">
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="w-6 h-6"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" 
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div 
+                class="fixed top-0 left-0 w-full h-[100vh] bg-black/60 z-50 opacity-0 pointer-events-none off-canvas" 
+                id="off-canvas"
+            >
+                <nav 
+                    class="absolute top-0 right-0 w-[80%] xs:w-[70%] sm:!w-[60%] h-[100vh] bg-ca-sky-light z-40 px-8 text-xl translate-x-full text-gray-600 font-medium"
+                >
+                    <button class="h-[var(--header-size)] menu-button" type="button">
+                        <img src="/assets/close.80658a2f.png" alt="Cerrar Menú" class="h-[25%]">
+                    </button>
+                    <ul>
+                        <li>
+                            <a 
+                                href="index.html" 
+                                class="py-3 w-full inline-block menu-link"
+                            >
+                                <span class="menu-item">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="shop.html" 
+                                class="py-3 w-full inline-block menu-link"
+                            >
+                                <span class="menu-item">Shop</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="blog.html" 
+                                class="py-3 w-full inline-block menu-link"
+                            >
+                                <span class="menu-item">Blog</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="about.html" 
+                                class="py-3 w-full inline-block menu-link"
+                            >
+                                <span class="menu-item">About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="contact.html" 
+                                class="py-3 w-full inline-block menu-link active"
+                            >
+                                <span class="menu-item">Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div 
+            class="fixed top-0 left-0 w-full h-[100vh] bg-black/75 z-50 opacity-0 pointer-events-none" 
+            id="form-modal"
+        >
+            <div class="page-container flex justify-center items-center h-full status"></div>
+        </div>
+        <div class="bg-[url('/img/banner.png')] bg-no-repeat bg-center bg-cover h-80 text-white">
+            <div class="page-container h-full flex flex-col justify-center gap-3 items-center">
+                <h2 class="text-6xl font-semibold">#let's_talk</h2>
+                <p class="font-light text-xl">LEAVE A MESSAGE, We love to hear from you!</p>
+            </div>
+        </div>
+        <section class="py-8 md:py-12 bg-ca-sky-light">
+            <div class="page-container">
+                <div class="grid lg:grid-cols-2 grid-rows-2 lg:grid-rows-[auto] gap-8 lg:min-h-[400px]">
+                    <div class="self-center">
+                        <h3 class="uppercase text-gray-400 font-light mb-5">Get In Touch</h3>
+                        <h2 class="font-semibold text-4xl mb-5">
+                            Visit one of our agency locations or contact us today
+                        </h2>
+                        <p class="font-semibold mb-4">Head Office</p>
+                        <ul class="flex flex-col gap-4">
+                            <li class="flex gap-6 items-center">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 384 512"
+                                    class="w-4"
+                                >
+                                    <path 
+                                        d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"
+                                    />
+                                </svg>
+                                <p class="text-gray-400 font-light">56 Glassford Street Glasgow GI IUL New York</p>
+                            </li>
+                            <li class="flex gap-6 items-center">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 512 512"
+                                    class="w-4"
+                                >
+                                    <path 
+                                        d="M447.1 0h-384c-35.25 0-64 28.75-64 63.1v287.1c0 35.25 28.75 63.1 64 63.1h96v83.98c0 9.836 11.02 15.55 19.12 9.7l124.9-93.68h144c35.25 0 64-28.75 64-63.1V63.1C511.1 28.75 483.2 0 447.1 0zM464 352c0 8.75-7.25 16-16 16h-160l-80 60v-60H64c-8.75 0-16-7.25-16-16V64c0-8.75 7.25-16 16-16h384c8.75 0 16 7.25 16 16V352z"
+                                    />
+                                </svg>
+                                <p class="text-gray-400 font-light">contact@example.com</p>
+                            </li>
+                            <li class="flex gap-6 items-center">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 512 512"
+                                    class="w-4"
+                                >
+                                    <path 
+                                        d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"
+                                    />
+                                </svg>
+                                <p class="text-gray-400 font-light">contact@example.com</p>
+                            </li>
+                            <li class="flex gap-6 items-center">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 512 512"
+                                    class="w-4"
+                                >
+                                    <path 
+                                        d="M232 120C232 106.7 242.7 96 256 96C269.3 96 280 106.7 280 120V243.2L365.3 300C376.3 307.4 379.3 322.3 371.1 333.3C364.6 344.3 349.7 347.3 338.7 339.1L242.7 275.1C236 271.5 232 264 232 255.1L232 120zM256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0zM48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48C141.1 48 48 141.1 48 256z"
+                                    />
+                                </svg>
+                                <p class="text-gray-400 font-light">Monday to Saturday: 9:00am to 16:00pm</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.2701361718136!2d-58.37950268519365!3d-34.64788016734237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb522783d079%3A0x900717d45f2ac4a8!2sOxford%20University%20Press%20Argentina%20Sa!5e0!3m2!1ses-419!2sar!4v1666198293390!5m2!1ses-419!2sar" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full h-full"
+                    ></iframe>
+                </div>
+            </div>
+        </section>
+        <div class="py-8 md:py-12 bg-ca-sky-light">
+            <div class="page-container">
+                <div class="lg:border border-gray-300 rounded-md lg:py-8 lg:px-12">
+                    <div class="grid lg:grid-cols-[2fr,1fr] gap-x-12 gap-y-10">
+                        <div>
+                            <p class="uppercase text-gray-400 mb-4">Leave a Message</p>
+                            <h2 class="text-3xl font-semibold mb-4">We love to hear from you</h2>
+                            <form 
+                                action="#" 
+                                class="flex flex-col gap-4 md:gap-6" 
+                                autocomplete="off" 
+                                id="message-form"
+                                method="POST"
+                            >
+                                <input 
+                                    type="text" 
+                                    placeholder="Your Name"
+                                    name="name"
+                                    class="outline-none border border-gray-300 rounded-sm py-2 px-4"
+                                    required
+                                >
+                                <input 
+                                    type="email" 
+                                    placeholder="E-mail"
+                                    name="password"
+                                    class="outline-none border border-gray-300 rounded-sm py-2 px-4"
+                                    required
+                                >
+                                <input 
+                                    type="text" 
+                                    placeholder="Subject"
+                                    name="subject"
+                                    class="outline-none border border-gray-300 rounded-sm py-2 px-4"
+                                    required
+                                >
+                                <textarea 
+                                    name="message"
+                                    class="resize-none outline-none border border-gray-300 rounded-sm h-40 py-2 px-4"
+                                    placeholder="Your Message"
+                                    required
+                                ></textarea>
+                                <input 
+                                    type="submit" 
+                                    value="Submit" 
+                                    class="bg-emerald-700 text-white py-3 px-8 rounded-sm cursor-pointer w-fit"
+                                >
+                            </form>
+                        </div>
+                        <div>
+                            <div class="flex flex-col gap-6">
+                                <div class="flex gap-3">
+                                    <div class="w-16 h-16 rounded-full">
+                                        <img src="/assets/1.a757030e.png" alt="People" class="object-cover object-center">
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-xl mb-1">John Doe</p>
+                                        <div class="text-gray-500">
+                                            <p>
+                                                Senior Marketing Manager
+                                                <br />
+                                                Phone: +0001230007788
+                                                <br />
+                                                Email: contact@example.com
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="w-16 h-16 rounded-full">
+                                        <img src="/assets/2.5711175b.png" alt="People" class="object-cover object-center">
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-xl mb-1">William Smith</p>
+                                        <div class="text-gray-500">
+                                            <p>
+                                                Senior Marketing Manager
+                                                <br />
+                                                Phone: +0001230007788
+                                                <br />
+                                                Email: contact@example.com
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <div class="w-16 h-16 rounded-full">
+                                        <img src="/assets/3.b10d7a6e.png" alt="People" class="object-cover object-center">
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-xl mb-1">Emma Stone</p>
+                                        <div class="text-gray-500">
+                                            <p>
+                                                Senior Marketing Manager
+                                                <br />
+                                                Phone: +0001230007788
+                                                <br />
+                                                Email: contact@example.com
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-[#041e42] h-60 md:h-52 bg-[url('/img/b14.png')]">
+            <div class="page-container h-full">
+                <div class="grid md:grid-cols-[repeat(2,1fr)] gap-6 content-center h-full">
+                    <div>
+                        <h3 class="text-white font-semibold text-3xl mb-2">Sign Up For Newsletters</h3>
+                        <p 
+                            class="text-gray-600 font-medium height"
+                        >
+                            Get E-mail updates about our latest shop and 
+                            <span class="text-amber-500">special offers.</span>
+                        </p>
+                    </div>
+                    <form action="#" class="flex items-center sm:w-[90%] lg:w-[80%] md:justify-self-end">
+                        <input 
+                            type="text" 
+                            placeholder="Your email address" 
+                            class="py-3 px-4 rounded-tl-md rounded-bl-md outline-none grow"
+                        >
+                        <input 
+                            type="submit" 
+                            value="Sign Up" 
+                            class="py-3 px-6 font-medium text-white bg-emerald-700 cursor-pointer rounded-tr-md rounded-br-md"
+                        >
+                    </form>
+                </div>
+            </div>
+    </main>
+    <footer class="pt-8 md:pt-12 bg-ca-sky-light">
+        <div class="page-container">
+            <div class="grid md:grid-cols-2 lg:grid-cols-[2fr,1fr,1fr,2fr] gap-6">
+                <div class="font-semibold">
+                    <img src="/assets/logo.152e4e9b.png" alt="Logo de Cara" class="mb-4">
+                    <h3 class="mb-4">Contact</h3>
+                    <div class="text-gray-500">
+                        <div class="mb-4">
+                            <p>
+                                Address:
+                                <span class="font-light">562 Wellington Road, Street 32, San Francisco</span>
+                            </p>
+                            <p>
+                                Phone:
+                                <span class="font-light">+012222365/(+91)0123456789</span>
+                            </p>
+                            <p>
+                                Hours:
+                                <span class="font-light">10:00 - 18:00. Mon - Sat</span>
+                            </p>
+                        </div>
+                        <p class="mb-4">Follow Us</p>
+                        <div class="flex items-center gap-2">
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 320 512"
+                                class="w-3"
+                            >
+                                <path 
+                                    d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                                />
+                            </svg>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 512 512"
+                                class="w-4"
+                            >
+                                <path 
+                                    d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                                />
+                            </svg>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 448 512"
+                                class="w-4"
+                            >
+                                <path 
+                                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                                />
+                            </svg>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 384 512"
+                                class="w-4"
+                            >
+                                <path 
+                                    d="M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 2.1 35.4 9.6 50.7-13.8 59.4-42 147.9-42 209.1 0 18.9 2.7 37.5 4.5 56.4 3.4 3.8 1.7 3.4 6.9 1.5 50.4-69 48.6-82.5 71.4-172.8 12.3 23.4 44.1 36 69.3 36 106.2 0 153.9-103.5 153.9-196.8C384 71.3 298.2 6.5 204 6.5z"
+                                />
+                            </svg>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 576 512"
+                                class="w-4"
+                            >
+                                <path 
+                                    d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="font-medium">
+                    <h3 class="mb-3 font-semibold">About</h3>
+                    <ul class="text-gray-400">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Tearms & Conditions</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="font-medium">
+                    <h3 class="mb-3 font-semibold">My Account</h3>
+                    <ul class="text-gray-400">
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">View Cart</a></li>
+                        <li><a href="#">My Wishlist</a></li>
+                        <li><a href="#">Track My Order</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+                <div class="font-medium">
+                    <h3 class="mb-3 font-semibold">Install App</h3>
+                    <div class="text-gray-400">
+                        <p class="mb-3">From App Store or Google Play</p>
+                        <div class="flex items-center flex-wrap gap-y-3 gap-x-1 mb-3">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAqqADAAQAAAABAAAAMAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgAMACqAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAQEBAQEBAgEBAgMCAgIDBAMDAwMEBQQEBAQEBQYFBQUFBQUGBgYGBgYGBgcHBwcHBwgICAgICQkJCQkJCQkJCf/bAEMBAQEBAgICBAICBAkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCf/dAAQAC//aAAwDAQACEQMRAD8A/v4ooooAKKKKACiivye8Bf8ABUvw98a/+CmOs/8ABPP4F+EbvX7TwJZXNx408WNL5Vlpd1GgEVlFGEYzStM6xuWeMAiQKH8tiAD9YaKK+afjN8W/iR4T+Jng/wCFPwv0rTNQ1HxRbardmXVbqa2hiTTFtyUBggnYtKbgDdtwoUnDZAoA+lqK/P3wp/wUZ+DWs+C4vFniDTdXsDb5tNW8i1e8ttP1VRL/AMS57mIbZJ5WiIgKLtfzIc7GmjU9TrX/AAUH/Zk0eK9kg1S71E2N/Hp7pY2U9w7SSx2ro8aouZIma9ghEi5Xz2MWd6sAAfbNFfn74e/b+8Ea/wDEbUvCVrpOoyJBb2FvZ6fHav8A2xNrM13rFveWLWxIjX7NHpLzGTzPL2bn3ldpPpsf7bXwCfVPBVg2oyxQ+Ponk0q4lQRJvRZmeGeN2W4ikT7PKr7otqOux2ViAQD61or4i+H/AO2z4M8b+I/FuqXtldaJ4L8MeEdM8WrqupW0tu9xZ38mo7rhIiCWg8iyWROBLlirIpABbrv7fnwa8NiSx1rSvEcOswGczaP/AGXK1/FFb2i3zzvEpIEX2ZvMVtxyVaIDzlMdAH2/RXwr+1B+2xp3wI8JWmueEdAu/Ep1rwnr3ifTryBR9iWPRrJLxPtJyJVScSKMopYDtnitfWv28vgZ4V8JTeI/GA1HSbu31ZtFk0u9tvs179rSyXUiBHK6psNk63Ct5nKsE/1p8ugD7TorB8LeJtD8a+GNN8ZeGLgXemavaw3tpOoIEsFwgkjcBgCAyMDggHnmt6gAooooAKKKKAP/0P7+KKKKACuX8ceLtK8AeC9Y8ea6WFjollcX9wVGW8q2jaV8D12qcV1Fc54x8LaX448I6r4K1xS9lrFnPY3CjqYriNo3H4qxoA/ykf2nv+C03/BQ79pr463vxstvid4h8H2n2tptG0bQdQnsLLTrfdmGJYoGRZXVMCSSUO0jZJ4IUeHeJf8AgpZ+3t4pv5dQh+J+taPc3l42oXR8PPHobXt/Ictd3f8AZaWv2q5djkzT73JPWvFf2pf2cvHf7Iv7RHi/9mv4k272+reD9SmsGLAgTQqc29wmesdxCUlQjqrCvA+f4SVPYjgg+ooA/wBiX9gTwX+0x4A/ZE8EeGf2v/FS+MviDFp0b6rqKwrC2+Qb1gkZeJpIFIiefCmVlLlQSc9Z+0p4H+B1x4fT42/HDWbrwzp/gSzvrmXWLbVLnSha2U6Ibzzp7aWJvKZYULZOQVBUg18Y/wDBFD9qn9oj9sb/AIJ++EfjP+0j4ej0XVZQ1jZ3kbt/xObOzCwpqZhZQYTO6uNoZlcqZEwjqo+d/wDgv/8AFe+i/Z88BfsgeGdN1TXdV+Nvi/T9LutK0OAXOpXOhaXIuo6uLWJnQO5iiSPDMq4kO5gM0AffvwE+D37EHxl8L+G/j1+zi9prXhM/ZpdNbSL6dtHuJtJDWdvcParJ5E1xbbDGskiFwUUsS0aFez0P9hD9lnw1ZWmn6H4ZFvHY6da6VDi6uSwtbLUl1eFCzSkki9VZS5yzYCsSgC1/NZ+yZ+0340/Zw/Zp/bp/Zt+Hela98KtV8AW2sfEnwHpmuWkVrqmmaZrdtJOqLblriEJa3cfyYZ1IlGeSQPXdB/aA/bf+AqfsdftV+I/jtefEmP8AaH1nQtA8Q+Dbiz0+PTVg1mzEpuNLW2hSeOSwOPOkeRy7nL7QxSgD+grUP2MPgBe6/qXi62026sNZ1O9TUn1Gzvrq3uortJbyUSwSxyhoiTqF0rBMK0crIwKYAybn9jv9lzwbfad8QbrTv7KtfClna4MmoXEVikOlrctDNdo8vlSmJbu5LyT7i3mO0hY4YfzzXHxT/br+Nvhf9sz4t6d+0tqfgaD9nXxr4lXw3plrZ6WYGh0+L7XDBqbz27yy2jqgt7dAyEN5jMZSQo/ZDw/pt9/wVI/4JEaZp/xku38GXnxm8AW39p3VqNn2OfUbVS0saOwzGZDuEbMN0Z2buc0Acx+yN8Vv+CUXxv8AEvir4D/sv+PNL8e6jf8Ah9dI1TSv7Wu9T/4kFi80MdtCLmR1FnAbySNfJO0CQAseDX1x4K/Zc/Zrv4f+Es8PCXxDNOL23k1WbVbnUJphcW66dPG9y8zs4jhiEKqWPlkMRhy7H8YP2b/iF+0/+z58XtJ/4JBftSWHh3RvEWt+ANRHgb4l/DyOKC7Ww0uMRv8Aa7C7hcW1wFRXDYaB5UA2tyw/Mr9jT4vftF/si/8ABGb4P678F/iZf6fcfG/4h2vgWC71KCyn07wXb3Osakl5e2KGFSZrjZub7U8iq5yoXAoA/sD8ffssfBf4leFdF8GeKNPuG07QNNutGtY4Lu4gP9n3tp9iubWVopFaWKWEKGDknciuCGUGpPFv7L3wf8Y39zrd9Z3Nrqdzqkesi/sry4t7mK9jsI9MEkUkbgoGs41hdB8jjllLc1/P38S/2gf2uv2Lf2gfjp+xlB8XdZ+JWm2fwL1n4j6LrmtRWL614d1axEsCpJNbW8MUkUzKJYlliO07QMrnd434z/at/wCChHwY/YZ+A3xG8QfEvX/GPi79qfW/D1vJNo+naXHceHtPl05riSy0NLvyrVr+9UIvnXjlTL5jqB8oAB/XJaW0dnaxWcRYrEioC5LMQowMsckn1J5NWK/Hj/glj4p/bnm8UfE7wF+1Jo3jFPBOm3On3XgjVvHq6SuvzQ3MTi+tLttIkeCYW8yBopSqsUkAbOMD9h6ACiiigAooooA//9H+/iiiigAooooA/OP9sv8A4JNfsHft8+NdG+I/7TXghNY13REWGO+trq4sZ57ZWLC3uXtZIzNEGJKq+SuTtIBOfnvxl/wb3/8ABIjxnqukarN8ILLTTpMiv5Om3l7aQ3SrjEd1HHOFmU453fMeQWINftBRQBkeH9A0LwpoVl4X8MWcOnabp0EdraWtsixQwQxKEjjjjUBVRFAVVAAAAArybxV+zd8E/HHxy8LftJeLNBjvvGvgm1vLPQ9SklmzZQ6guy6EcIkEO6VRtZ2jL44BAr3CigD85P25f2APh9+0f4B+J/jX4faNY2nxe8ZfD7VPAllrtzPcQxmzvUdo4LlYi8bRLOwfeYXkXHyngCvOv2If+CRX7If7Kul/D/4mz+A9MHxT8MeH7KxudVhuLu5todQFokN/cWFvcSGC3a4kDs0kUETvuJOCzZ/WCigD8Bfgt/wQ1+AniX4sfGr4nftt+EdH8X3Hjn4j6n4o0Nra9vkB0i68qSC11KKJreKfZMrv5MqzRqWJB+Y1+0XxN+Bfwj+Mfwe1H4AfEfQbbUfBmq2S6dc6SA0Nu1qu0LCohKFFUKoUIV24GMYr1iigD4a/Ze/4Js/sUfsa+Kr/AMe/s9eBrfR9f1K3FnPqlzc3eo3ptgwbyEuL6aeWOHIBMaMqkgZBwMcx4Z/4JSf8E+fCPgPx38K9F+Gmnjwx8SrmK81/SZprqeymnhd5I5IIJZmS0ZJJHdTaiIqxyMYGP0MooA+FfhH/AME0f2Ivgd4H8ZfD/wCHXgSC3sviFYvpniOa6ury9vtRspImhNvNfXU8t35QjcqqLKFXOVAPNeheOv2JP2VfiZ+zfpv7I3j7wVY6t8O9FtrS00/R7gyutrHYKEtTBNv8+OSFQAkqyCQc/Nyc/VFFAHzD+zH+xz+z5+x5oeqeH/gDo9zpcGtTR3F613qN/qUs0kSbIyZb+4uHAVOAqsFx2r6eoooAKKKKACiiigD/2Q==" alt="App Store" class="border border-gray-400 rounded-md">
+                            <img src="data:image/jpeg;base64,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" alt="Google Play" class="border border-gray-400 rounded-md">
+                        </div>
+                        <p class="mb-3">Secure Payment Gateways</p>
+                        <img src="/assets/pay.c064b197.png" alt="Payment">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-container py-6 text-sm text-center font-medium text-gray-400">
+            <p>@2021. Tech2etc - HTML, CSS Ecommerce Template</p>
+        </div>
+    </footer>
+    
+    
+</body>
+</html>
