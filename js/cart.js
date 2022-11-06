@@ -98,11 +98,11 @@ window.addEventListener('DOMContentLoaded', () => {
             const newState = Object.entries(updatedState).map(([ key, value ]) => {
                 switch(true) {
                     case key === 'discount':
-                        return [ key, Object.fromEntries(Object.entries(value).map(([ key, value ]) => {
-                            if (key === 'isActive') {
-                                return [ key, value = true ]
+                        return [ key, Object.fromEntries(Object.entries(value).map(([ discountKey, discountValue ]) => {
+                            if (discountKey === 'isActive') {
+                                return [ discountKey, discountValue = true ]
                             } else {
-                                return [ key, value ]
+                                return [ discountKey, discountValue ]
                             }
                         })) ]
                     default:
