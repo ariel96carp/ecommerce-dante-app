@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .page-container{
+        @apply container w-[90%] sm:w-full mx-auto;
+    }
+
+    .menu-item{
+        @apply 
+            relative 
+            after:absolute 
+            after:top-full 
+            after:left-0 
+            after:content-[''] 
+            after:block 
+            after:w-1/2 
+            after:bg-sky-400 
+            after:h-[2px]
+            after:opacity-0;
+        }
+    
+        .menu-link{
+            @apply hover:text-sky-400 transition-[color];
+        }
+
+        .feature-card{
+            @apply bg-white shadow-sm border border-gray-300 rounded-md py-6 px-4 text-center hover:shadow-lg;
+        }
+
+        .feature-text{
+            @apply text-emerald-600 font-medium py-1 px-2 rounded-sm md:text-sm w-fit mx-auto;
+        }
+
+        .product-card{
+            @apply pt-2 px-2 pb-5 border border-gray-300 rounded-xl shadow-md bg-white;
+        }
+
+        .product-banner{
+            @apply bg-no-repeat bg-center bg-cover flex flex-col justify-center items-start px-6 text-white;
+        }
+
+        .product-banner-btn{
+            @apply py-2 px-5 border-2 border-white group-hover:bg-emerald-700 group-hover:border-emerald-700 transition-colors;
+        }
+
+        .blog-card{
+            @apply grid grid-rows-2 md:grid-rows-[auto] md:grid-cols-[repeat(2,1fr)] h-[25rem] md:h-80 gap-x-12 gap-y-6;
+        }
+}
+
+:root{
+    --header-size: 4.5rem;
+}
+
+html{
+    font-size: 0.8125rem;
+    scroll-behavior: smooth;
+}
+
+@media screen and (min-width: 20rem){
+    html{
+        font-size: calc(0.8125rem + 0.1875 * ((100vw - 20rem) / 61.25));
+    }
+}
+
+@media screen and (min-width: 81.25rem){
+    html{
+        font-size: 1rem;
+    }
+}
+
+body{
+    display: grid;
+    grid-template-rows: auto min-content;
+    min-height: calc(100vh - var(--header-size)); 
+    margin-top: var(--header-size);
+}
+
+.active-modal{
+    @apply opacity-100 pointer-events-auto;
+}
+
+.active-modal nav{
+    @apply translate-x-0 transition-transform;
+}
+
+.menu-link:hover .menu-item::after, .menu-link:hover::after, .menu-item.active::after, .menu-link.active .menu-item::after{
+    @apply opacity-100;
+}
+
+.menu-link.active{
+    @apply text-sky-400;
+}
+
+.check-image{
+    transform: translate(-50%, 50%);
+}
+
+.show-modal{
+    @apply opacity-100 pointer-events-auto;
+}
+
+.number{
+    transform: translate(-50%, -50%);
+}
