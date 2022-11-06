@@ -6,7 +6,7 @@ const initalState = {
             enterprise: 'Adidas',
             reviews: 5,
             price: 135,
-            url: 'img/c1.jpg',
+            url: './img/c1.jpg',
             type: 'featured',
             description: "The Adicolor 70s collection draws heavily on archival silhouettes and classics. Undeniably \
             adidas, the detail-oriented range combines luxurious and textural materials with a bright color palette to \
@@ -21,7 +21,7 @@ const initalState = {
             enterprise: 'Louis Vuitton',
             reviews: 3,
             price: 210,
-            url: 'img/c2.jpg',
+            url: './img/c2.jpg',
             type: 'featured',
             description: "When groups say they want a custom t-shirt, what they're talking about is this Gildan Ultra \
             Cotton T‑shirt. This is basically the epitome of tees, which is why year-after-year it's one of our most \
