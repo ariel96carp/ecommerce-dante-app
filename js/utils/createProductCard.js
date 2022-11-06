@@ -14,7 +14,7 @@ const createProductCard = (product) => {
     productRating.replaceChildren()
     for (let i = 0; i < product.reviews; i++) {
         const star = document.createElement('img')
-        star.src = 'img/estrella.png'
+        star.src = `${new URL('../../img/estrella.png', import.meta.url).href}`
         star.alt = 'Star'
         star.classList.add('w-3')
         productRating.appendChild(star)
