@@ -22,7 +22,13 @@ window.addEventListener('DOMContentLoaded', () => {
         const detailsMainImage = detailsTemplate.querySelector('.image')
         detailsMainImage.src = product.url
         const detailsAltImages = detailsTemplate.querySelectorAll('.alt-image')
-        detailsAltImages[0].src = product.url
+        for (let i = 0; i < 4; i++) {
+            if (i !== 0) {
+                detailsAltImages[i].src = `${new URL(`../img/c${i + 1}.jpg`, import.meta.url).href}`
+            } else {
+                detailsAltImages[0].src = product.url
+            }
+        }
         const detailsDescription = detailsTemplate.querySelector('.description')
         detailsDescription.textContent = product.description
         const detailsName = detailsTemplate.querySelector('.name')
