@@ -13,6 +13,13 @@ window.addEventListener('DOMContentLoaded', () => {
             offCanvasModal.classList.toggle('active-modal')
         })
     }
+    offCanvasModal.addEventListener('click', (e) => {
+        const nav = offCanvasModal.querySelector('nav')
+        const target = e.target
+        if (target.classList.contains('active-modal')) {
+            if (!(nav.contains(target))) target.classList.remove('active-modal')
+        }
+    })
     window.addEventListener('resize', () => {
         const mediumBp = matchMedia('(min-width: 768px)')
         if (mediumBp.matches){

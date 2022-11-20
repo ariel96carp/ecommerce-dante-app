@@ -28,6 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
             } else {
                 detailsAltImages[0].src = product.url
             }
+            detailsAltImages[i].loading = 'lazy'
         }
         const detailsDescription = detailsTemplate.querySelector('.description')
         detailsDescription.textContent = product.description
@@ -40,9 +41,8 @@ window.addEventListener('DOMContentLoaded', () => {
         element.appendChild(detailsBanner)
     }
     const detailsSection = document.getElementById('details-section')
-    if (actualProduct) {
-        renderDetails(actualProduct, detailsSection)
-    } else {
+    if (actualProduct) renderDetails(actualProduct, detailsSection)
+    else {
         detailsSection.insertAdjacentHTML(
             'beforeend', `${
                 idParam !== ""

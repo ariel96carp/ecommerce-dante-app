@@ -7,10 +7,10 @@ const setPaginate = (activePage, items, createCard, mainElement) => {
         button.addEventListener('click', async (e) => {
             const buttonNumber = parseInt(e.target.textContent)
             if (activePage !== buttonNumber) {
+                activePage = buttonNumber
                 const sectionTop = sectionElement.getBoundingClientRect().top
                 const headerSize = parseFloat(headerStyles.getPropertyValue('height'))
                 window.scroll(0, sectionTop + window.scrollY - headerSize)
-                activePage = buttonNumber
                 const fragment = document.createDocumentFragment()
                 const indexStart =  buttonNumber !== 1 ? Math.round(items.length / 2) : 0
                 const indexEnd = buttonNumber !== 1 ? items.length : Math.round(items.length / 2)
