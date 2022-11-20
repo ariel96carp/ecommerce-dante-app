@@ -1,1 +1,0 @@
-const i=(e,t,a,r)=>{const c=document.querySelectorAll(".paginate");for(let d of c)d.addEventListener("click",l=>{const n=parseInt(l.target.textContent);if(e!==n){e=n;const o=document.createDocumentFragment(),s=n!==1?Math.round(t.length/2):0,u=n!==1?t.length:Math.round(t.length/2);t.slice(s,u).forEach(g=>{const h=a(g);o.appendChild(h)}),r.replaceChildren(o)}})};export{i as s};
