@@ -23,15 +23,23 @@ npm run production
 ```
 
 ## Overview
-![Overview](./img/ecommerce-dante-app.netlify.app_(1).png)
+<p> 
+    <img alt="Overview" src="./img/ecommerce-dante-app.netlify.app_(1).png">
+</p>
+
 ![Overview](./img/ecommerce-dante-app.netlify.app_2.png)
+
 ![Overview](./img/ecommerce-dante-app.netlify.app_contact.html.png)
+
 ![Overview](./img/localhost_5173_shop.html.png)
-![Overview](./img/ecommerce-dante-app.netlify.app_details.html_id%3DDFSF(1).png)
+
+<p> 
+    <img alt="Overview" src="./img/ecommerce-dante-app.netlify.app_details.html_id%3DDFSF(1).png">
+</p>
 
 ## Usage
 ![Overview](./img/ecommerce-dante-app.netlify.app_cart.html.png)
-In the "Apply coupon" section, the valid coupons are: *B4sdED, 5Rl8f, LFs92, R46Ej*.
+In the "Apply coupon" section the valid coupons are: **B4sdED, 5Rl8f, LFs92, R46Ej**.
 
 ## Deploy
 [https://ecommerce-dante-app.netlify.app](https://ecommerce-dante-app.netlify.app)
