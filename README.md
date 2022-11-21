@@ -16,7 +16,7 @@ npm run dev
 ```
 
 ## Overview
-![Overview](./img/ecommerce-dante-app.netlify.app_(1).png)
+![Overview](./img/ecommerce-dante-app.netlify.app_(1).png){style="display: block; margin: 0 auto"}
 ![Overview](./img/ecommerce-dante-app.netlify.app_2.png)
 ![Overview](./img/ecommerce-dante-app.netlify.app_contact.html.png)
 ![Overview](./img/ecommerce-dante-app.netlify.app_cart.html.png)
