@@ -1,3 +1,4 @@
+import Timeout from 'smart-timeout'
 import createProductCard from './utils/createProductCard'
 import setCart from './utils/setCart'
 
@@ -43,13 +44,19 @@ window.addEventListener('DOMContentLoaded', () => {
     const detailsSection = document.getElementById('details-section')
     if (actualProduct) renderDetails(actualProduct, detailsSection)
     else {
-        detailsSection.insertAdjacentHTML(
-            'beforeend', `${
-                idParam !== ""
-                    ? `<p>The article "${idParam}" was not found.</p>`
-                    : '<p>The searched article was not found.</p>'
-            }`
-        )
+        switch(true) {
+            case idParam !== null:
+                detailsSection.insertAdjacentHTML(
+                    'beforeend', `${
+                        idParam !== ""
+                            ? `<p>The article "${idParam}" was not found.</p>`
+                            : '<p>The searched article was not found.</p>'
+                    }`
+                )
+                break
+            default:
+                detailsSection.insertAdjacentHTML('beforeend', '<p>No article was requested.</p>')
+        }
     }
     renderProducts(state)
     const altImages = document.getElementsByClassName('alt-image')
@@ -63,6 +70,24 @@ window.addEventListener('DOMContentLoaded', () => {
     const detailsForm = document.getElementById('details-form')
     if (detailsForm) {
         detailsForm.addEventListener('submit', (e) => {
+            const createBuyAlert = ({ product, price, quantity, img }) => {
+                if (Timeout.exists('alertTimeout')) Timeout.clear('alertTimeout')
+                const mainSection = document.querySelector('main')
+                const alertTemplate = document.getElementById('buy-alert').content
+                const productName = alertTemplate.querySelector('.name')
+                const subtotal = alertTemplate.querySelector('.subtotal')
+                const productImage = alertTemplate.querySelector('.image')
+                productName.textContent = product
+                subtotal.textContent = `$${(price * quantity).toFixed(2)}`
+                productImage.src = img
+                const alertClon = alertTemplate.cloneNode(true)
+                const prevAlert = document.getElementById('alert')
+                if (prevAlert) mainSection.removeChild(prevAlert)
+                mainSection.appendChild(alertClon)
+                Timeout.create('alertTimeout', () => {
+                    mainSection.removeChild(mainSection.lastElementChild)
+                }, 2000)
+            }
             const updatedState = JSON.parse(sessionStorage.getItem('products'))
             e.preventDefault()
             const target = e.target
@@ -97,6 +122,12 @@ window.addEventListener('DOMContentLoaded', () => {
                     default:
                         return [ key, value ]
                 }
+            })
+            createBuyAlert({ 
+                product: actualProduct.name, 
+                price: actualProduct.price, 
+                quantity: productQuantity, 
+                img: actualProduct.url
             })
             setCart(Object.fromEntries(newState))
             sessionStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))

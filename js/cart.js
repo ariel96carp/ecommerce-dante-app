@@ -118,6 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
             statusDiv.classList.toggle('!block')
             setTimeout(() => {
                 statusDiv.classList.toggle('!block')
+                couponForm.reset()
             }, 2000)
         }
     })

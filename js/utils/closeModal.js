@@ -4,6 +4,7 @@ const closeModal = (modal) => {
         const modalButton = document.getElementById('modal-button')
         if (target === modalButton) {
             modal.classList.toggle('show-modal')
+            if (modal.classList.contains('cart')) window.location.href = '/'
         }
     }) 
 }
