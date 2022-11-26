@@ -3,6 +3,7 @@ import closeModal from './utils/closeModal'
 window.addEventListener('DOMContentLoaded', () => {
     const formModal = document.getElementById('form-modal')
     const messageForm = document.getElementById('message-form')
+    closeModal(formModal)
     messageForm.addEventListener('submit', (e) => {
         e.preventDefault()
         formModal.classList.toggle('show-modal')
@@ -21,5 +22,4 @@ window.addEventListener('DOMContentLoaded', () => {
             messageForm.reset() 
         }, 2000)
     })
-    closeModal(formModal)
 })

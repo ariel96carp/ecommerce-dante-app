@@ -6,37 +6,39 @@ import setCart from './utils/setCart'
 window.addEventListener('DOMContentLoaded', () => {
     const VALID_COUPONS = [ 'B4sdED', '5Rl8f', 'LFs92', 'R46Ej' ]
     const SIZES = [ 'XXL', 'XL', 'Small', 'Large' ]
-    const state = JSON.parse(sessionStorage.getItem('products'))
+    const state = JSON.parse(localStorage.getItem('products'))
+    const couponForm = document.getElementById('coupon-form')
+    const formModal = document.getElementById('form-modal')
+    const tableContainer = document.getElementById('table-container')
     const renderTable = ({ sales }) => {
         const salesTable = document.getElementById('sales-table')
         const rowTemplate = document.getElementById('sale-row').content
         const fragment = document.createDocumentFragment()
         sales.forEach((sale) => {
             const productId = rowTemplate.querySelector('.code')
-            productId.textContent = sale.id
             const productSize = rowTemplate.querySelector('.size')
-            productSize.textContent = SIZES[sale.size]
             const productImage = rowTemplate.querySelector('.image')
-            productImage.src = sale.url
             const productName = rowTemplate.querySelector('.name')
-            productName.textContent = sale.name
             const productPrice = rowTemplate.querySelector('.price')
-            productPrice.textContent = `$${sale.price.toFixed(2)}`
             const productQuantity = rowTemplate.querySelector('.quantity')
-            productQuantity.value = sale.quantity
             const saleSubtotal = rowTemplate.querySelector('.subtotal')
+            productId.textContent = sale.id
+            productSize.textContent = SIZES[sale.size]
+            productImage.src = sale.url
+            productName.textContent = sale.name
+            productPrice.textContent = `$${sale.price.toFixed(2)}`
+            productQuantity.value = sale.quantity
             saleSubtotal.textContent = `$${(sale.price * sale.quantity).toFixed(2)}`
             const templateClon = rowTemplate.cloneNode(true)
             fragment.appendChild(templateClon)
         })
         salesTable.replaceChildren(fragment)
     }
-    renderTable(state)
     const renderTotals = ({ discount, sales }) => {
         const totalsContainer = document.getElementById('totals-container')
         const totalsTemplate = document.getElementById('cart-totals').content
         const coupon = totalsTemplate.querySelector('.coupon')
-        if (discount.isActive) {
+        if (discount.active) {
             coupon.classList.add('!table-row')
         } else {
             coupon.classList.remove('!table-row')
@@ -48,16 +50,38 @@ window.addEventListener('DOMContentLoaded', () => {
             saleSubtotal += subtotal
         })
         const subtotal = totalsTemplate.querySelector('.cart-subtotal')
-        subtotal.textContent = `$${saleSubtotal.toFixed(2)}`
         const total = totalsTemplate.querySelector('.cart-total')
         const totalDiscount = `$${(saleSubtotal - (saleSubtotal * discountRate)).toFixed(2)}` 
-        total.textContent = discount.isActive ? totalDiscount : `$${saleSubtotal.toFixed(2)}`
+        subtotal.textContent = `$${saleSubtotal.toFixed(2)}`
+        total.textContent = discount.active ? totalDiscount : `$${saleSubtotal.toFixed(2)}`
         const templateClon = totalsTemplate.cloneNode(true)
         totalsContainer.replaceChildren(templateClon)
     }
+    const renderCouponSubmit = ({ discount }) => {
+        const couponSubmit = document.querySelector('.coupon-submit')
+        if (discount.active && !couponSubmit.disabled) {
+            couponSubmit.disabled = true
+            couponSubmit.classList.add('opacity-50', 'cursor-auto')
+        } else {
+            couponSubmit.disabled = false
+            couponSubmit.classList.remove('opacity-50', 'cursor-auto')
+        }
+    }
+    const setMaxTableOnResponsive = () => {
+        const smallBp = matchMedia('(max-width: 480px)')
+        if (smallBp.matches) {
+            tableContainer.style.maxWidth = `${document.body.clientWidth}px` 
+        } else {
+            tableContainer.removeAttribute('style')
+        }
+    }
+    renderTable(state)
     renderTotals(state)
+    renderCouponSubmit(state)
+    setMaxTableOnResponsive()
+    closeModal(formModal) 
     onDeleteClick('.remove', (e) => {
-        const updatedState = JSON.parse(sessionStorage.getItem('products'))
+        const updatedState = JSON.parse(localStorage.getItem('products'))
         const idCell = e.target.closest('td').nextElementSibling
         const productSize = idCell.nextElementSibling.textContent
         const productId = idCell.textContent
@@ -74,32 +98,20 @@ window.addEventListener('DOMContentLoaded', () => {
         renderTable(Object.fromEntries(newState))
         renderTotals(Object.fromEntries(newState))
         setCart(Object.fromEntries(newState))
-        sessionStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+        localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
     })
-    const renderCouponSubmit = ({ discount }) => {
-        const couponSubmit = document.querySelector('.coupon-submit')
-        if (discount.isActive && !couponSubmit.disabled) {
-            couponSubmit.disabled = true
-            couponSubmit.classList.add('opacity-50', 'cursor-auto')
-        } else {
-            couponSubmit.disabled = false
-            couponSubmit.classList.remove('opacity-50', 'cursor-auto')
-        }
-    }
-    renderCouponSubmit(state)
-    const couponForm = document.getElementById('coupon-form')
     couponForm.addEventListener('submit', (e) => {
         e.preventDefault()
         const statusDiv = document.getElementById('error-coupon')
         const target = e.target
         const givenCoupon = target.coupon.value
         if (VALID_COUPONS.find((coupon) => coupon === givenCoupon.trim())) {
-            const updatedState = JSON.parse(sessionStorage.getItem('products'))
+            const updatedState = JSON.parse(localStorage.getItem('products'))
             const newState = Object.entries(updatedState).map(([ key, value ]) => {
                 switch(true) {
                     case key === 'discount':
                         return [ key, Object.fromEntries(Object.entries(value).map(([ discountKey, discountValue ]) => {
-                            if (discountKey === 'isActive') {
+                            if (discountKey === 'active') {
                                 return [ discountKey, discountValue = true ]
                             } else {
                                 return [ discountKey, discountValue ]
@@ -111,7 +123,7 @@ window.addEventListener('DOMContentLoaded', () => {
             })
             renderTotals(Object.fromEntries(newState))
             renderCouponSubmit(Object.fromEntries(newState))
-            sessionStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+            localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
             couponForm.reset()
         }
         else {
@@ -121,25 +133,23 @@ window.addEventListener('DOMContentLoaded', () => {
                 couponForm.reset()
             }, 2000)
         }
-    })
-    const formModal = document.getElementById('form-modal')
-    closeModal(formModal)   
+    }) 
     document.addEventListener('click', (e) => {
+        const updatedState = JSON.parse(localStorage.getItem('products'))
+        const target = e.target
+        const salesButton = document.getElementById('sales-button')
         const getTotals = ({ sales, discount }) => {
             let saleTotals = 0
             sales.forEach((sale) => {
                 const subtotal = sale.price * sale.quantity
                 saleTotals += subtotal 
             })
-            if (discount.isActive) {
+            if (discount.active) {
                 const rate = parseFloat(discount.rate) / 100
                 saleTotals = saleTotals - (saleTotals * rate)
             }
             return saleTotals
         }
-        const updatedState = JSON.parse(sessionStorage.getItem('products'))
-        const target = e.target
-        const salesButton = document.getElementById('sales-button')
         if (target === salesButton) {
             if (updatedState.sales.length > 0) {
                 const saleTotals = getTotals(updatedState)
@@ -153,7 +163,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     renderCouponSubmit(initialState)
                     renderTotals(initialState)
                     setCart(initialState)
-                    sessionStorage.setItem('products', JSON.stringify(initialState))
+                    localStorage.setItem('products', JSON.stringify(initialState))
                     const successTemplate = document.getElementById('success-alert').content
                     const successLogo = successTemplate.querySelector('.logo')
                     const successPayment = successTemplate.querySelector('.payment')
@@ -171,16 +181,5 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
     })
-
-    const tableContainer = document.getElementById('table-container')
-    const setMaxTableOnResponsive = () => {
-        const smallBp = matchMedia('(max-width: 480px)')
-        if (smallBp.matches) {
-            tableContainer.style.maxWidth = `${document.body.clientWidth}px` 
-        } else {
-            tableContainer.removeAttribute('style')
-        }
-    }
-    setMaxTableOnResponsive()
     window.addEventListener('resize', setMaxTableOnResponsive)
 })

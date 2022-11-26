@@ -2,7 +2,7 @@ import createProductCard from './utils/createProductCard'
 import setPaginate from './utils/setPaginate'
 
 window.addEventListener('DOMContentLoaded', () => {
-    const products = JSON.parse(sessionStorage.getItem('products')).products
+    const products = JSON.parse(localStorage.getItem('products')).products
     const featuredProducts = document.getElementById('featured-products')
     let activePage = 1
     const renderProducts = (element) => {

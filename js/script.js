@@ -2,8 +2,8 @@ import initialState from './utils/initialState'
 import setCart from './utils/setCart'
 
 window.addEventListener('DOMContentLoaded', () => {
-    if (!(sessionStorage.getItem('products'))) sessionStorage.setItem('products', `${JSON.stringify(initialState)}`)
-    const state = JSON.parse(sessionStorage.getItem('products'))
+    if (!(localStorage.getItem('products'))) localStorage.setItem('products', `${JSON.stringify(initialState)}`)
+    const state = JSON.parse(localStorage.getItem('products'))
     setCart(state)
 
     const offCanvasModal = document.getElementById('off-canvas')

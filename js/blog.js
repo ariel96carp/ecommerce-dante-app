@@ -1,7 +1,8 @@
 import setPaginate from './utils/setPaginate'
 
 window.addEventListener('DOMContentLoaded', () => {
-    const state = JSON.parse(sessionStorage.getItem('products'))
+    const state = JSON.parse(localStorage.getItem('products'))
+    const blogSection = document.getElementById('blog-section')
     let activePage = 1
     const createBlogCard = (article) => {
         const blogTemplate = document.getElementById('blog-card').content 
@@ -24,7 +25,6 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         element.appendChild(fragment)
     }
-    const blogSection = document.getElementById('blog-section')
     renderBlogs(blogSection, state)
     setPaginate(activePage, state.articles, createBlogCard, blogSection)
 })

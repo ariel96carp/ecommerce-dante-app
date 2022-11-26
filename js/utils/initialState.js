@@ -265,7 +265,7 @@ const initalState = {
     ],
     sales: [],
     discount: {
-        isActive: false,
+        active: false,
         rate: '25%'
     }
 }

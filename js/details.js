@@ -3,10 +3,12 @@ import createProductCard from './utils/createProductCard'
 import setCart from './utils/setCart'
 
 window.addEventListener('DOMContentLoaded', () => {
-    const state = JSON.parse(sessionStorage.getItem('products'))
+    const state = JSON.parse(localStorage.getItem('products'))
     const URLParams = new URLSearchParams(window.location.search)
     const idParam = URLParams.get('id')
     const actualProduct = state.products.find((product) => product.id === idParam)
+    const detailsSection = document.getElementById('details-section')
+    const altImages = document.getElementsByClassName('alt-image')
     const renderProducts = ({ products }) => {
         const productsGrid = document.getElementById('products')
         const fragment = document.createDocumentFragment()
@@ -18,11 +20,14 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     const renderDetails = (product, element) => {
         const detailsBanner = document.createElement('div')
-        detailsBanner.className = 'grid lg:grid-cols-[repeat(2,1fr)] content-center gap-12 h-full sm:w-[80%] mx-auto'
         const detailsTemplate = document.getElementById('product-details').content
         const detailsMainImage = detailsTemplate.querySelector('.image')
-        detailsMainImage.src = product.url
         const detailsAltImages = detailsTemplate.querySelectorAll('.alt-image')
+        const detailsDescription = detailsTemplate.querySelector('.description')
+        const detailsName = detailsTemplate.querySelector('.name')
+        const detailsPrice = detailsTemplate.querySelector('.price')
+        detailsBanner.className = 'grid lg:grid-cols-[repeat(2,1fr)] content-center gap-12 h-full sm:w-[80%] mx-auto'
+        detailsMainImage.src = product.url
         for (let i = 0; i < 4; i++) {
             if (i !== 0) {
                 detailsAltImages[i].src = `${new URL(`../img/c${i + 1}.jpg`, import.meta.url).href}`
@@ -31,17 +36,13 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             detailsAltImages[i].loading = 'lazy'
         }
-        const detailsDescription = detailsTemplate.querySelector('.description')
         detailsDescription.textContent = product.description
-        const detailsName = detailsTemplate.querySelector('.name')
         detailsName.textContent = product.name
-        const detailsPrice = detailsTemplate.querySelector('.price')
         detailsPrice.textContent = `$${product.price.toFixed(2)}`
         const templateClon = detailsTemplate.cloneNode(true)
         detailsBanner.appendChild(templateClon)
         element.appendChild(detailsBanner)
     }
-    const detailsSection = document.getElementById('details-section')
     if (actualProduct) renderDetails(actualProduct, detailsSection)
     else {
         switch(true) {
@@ -49,27 +50,30 @@ window.addEventListener('DOMContentLoaded', () => {
                 detailsSection.insertAdjacentHTML(
                     'beforeend', `${
                         idParam !== ""
-                            ? `<p>The article "${idParam}" was not found.</p>`
-                            : '<p>The searched article was not found.</p>'
+                        ? `<p>The article "${idParam}" was not found.</p>`
+                        : '<p>The searched article was not found.</p>'
                     }`
                 )
                 break
             default:
                 detailsSection.insertAdjacentHTML('beforeend', '<p>No article was requested.</p>')
-        }
+            }
     }
     renderProducts(state)
-    const altImages = document.getElementsByClassName('alt-image')
     for (let image of altImages) {
         image.addEventListener('click', (e) => {
             const mainImage = document.getElementById('main-image')
             mainImage.src = e.target.src
         })
     }
-
     const detailsForm = document.getElementById('details-form')
     if (detailsForm) {
         detailsForm.addEventListener('submit', (e) => {
+            const updatedState = JSON.parse(localStorage.getItem('products'))
+            e.preventDefault()
+            const target = e.target
+            const productSize = parseInt(target.size.value) 
+            const productQuantity = parseInt(target.quantity.value) 
             const createBuyAlert = ({ product, price, quantity, img }) => {
                 if (Timeout.exists('alertTimeout')) Timeout.clear('alertTimeout')
                 const mainSection = document.querySelector('main')
@@ -86,13 +90,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 mainSection.appendChild(alertClon)
                 Timeout.create('alertTimeout', () => {
                     mainSection.removeChild(mainSection.lastElementChild)
-                }, 2000)
+                }, 4000)
             }
-            const updatedState = JSON.parse(sessionStorage.getItem('products'))
-            e.preventDefault()
-            const target = e.target
-            const productSize = parseInt(target.size.value) 
-            const productQuantity = parseInt(target.quantity.value) 
             const soldProduct = Object.defineProperties(actualProduct, {
                 size: {
                     value: productSize,
@@ -130,7 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 img: actualProduct.url
             })
             setCart(Object.fromEntries(newState))
-            sessionStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+            localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
             detailsForm.reset()
         })
     }

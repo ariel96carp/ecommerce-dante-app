@@ -1,7 +1,9 @@
 import createProductCard from './utils/createProductCard'
 
 window.addEventListener('DOMContentLoaded', () => {
-    const state = JSON.parse(sessionStorage.getItem('products'))
+    const state = JSON.parse(localStorage.getItem('products'))
+    const featuredProducts = document.getElementById('featured-products')
+    const arrivedProducts = document.getElementById('arrived-products')
     const renderProducts = (element, filter) => {
         const fragment = document.createDocumentFragment()
         state.products.filter((product) => product.type === filter).forEach((product) => {
@@ -10,8 +12,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }) 
         element.appendChild(fragment)
     }
-    const featuredProducts = document.getElementById('featured-products')
-    const arrivedProducts = document.getElementById('arrived-products')
     renderProducts(featuredProducts, 'featured')
     renderProducts(arrivedProducts, 'arrived')
 })
