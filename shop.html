@@ -46,6 +46,22 @@
             class="absolute bottom-[70%] left-[80%] bg-red-400 w-4 h-4 text-xs text-white rounded-full text-center quantity"
         ></div>
     </template>
+    <template id="buttons-container">
+        <div class="text-white">
+            <button 
+                class="w-10 h-10 rounded-md font-medium bg-emerald-700 paginate" 
+                type="button"
+            >
+                1
+            </button>
+            <button 
+                class="w-10 h-10 rounded-md font-medium bg-emerald-700 paginate" 
+                type="button"
+            >
+                2
+            </button>
+        </div>
+    </template>
     <header class="fixed top-0 left-0 w-full h-[var(--header-size)] z-40 bg-ca-sky-light shadow-md">
         <div class="page-container flex justify-between items-center h-full">
             <a href="index.html">
@@ -178,26 +194,7 @@
             </div>
         </div>
         <section class="py-8 md:py-12 bg-ca-sky-light">
-            <div class="page-container text-center font-medium">
-                <div 
-                    class="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-8 mb-8 md:mb-12" 
-                    id="featured-products"
-                ></div>
-                <div class="text-white">
-                    <button 
-                        class="w-10 h-10 rounded-md font-medium bg-emerald-700 paginate" 
-                        type="button"
-                    >
-                        1
-                    </button>
-                    <button 
-                        class="w-10 h-10 rounded-md font-medium bg-emerald-700 paginate" 
-                        type="button"
-                    >
-                        2
-                    </button>
-                </div>
-            </div>
+            <div class="page-container text-center font-medium" id="featured-products"></div>
         </section>
         <div class="bg-[#041e42] h-60 md:h-52 bg-[url('/img/b14.png')]">
             <div class="page-container h-full">

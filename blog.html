@@ -27,6 +27,22 @@
             </div>
         </article>
     </template>
+    <template id="buttons-container">
+        <div class="text-white text-center">
+            <button 
+                class="w-10 h-10 rounded-md font-medium bg-emerald-700 paginate" 
+                type="button"
+            >
+                1
+            </button>
+            <button 
+                class="w-10 h-10 rounded-md font-medium bg-emerald-700 paginate" 
+                type="button"
+            >
+                2
+            </button>
+        </div>
+    </template>
     <header class="fixed top-0 left-0 w-full h-[var(--header-size)] z-40 bg-ca-sky-light shadow-md">
         <div class="page-container flex justify-between items-center h-full">
             <a href="index.html">
@@ -159,23 +175,7 @@
             </div>
         </div>
         <section class="pt-20 md:pt-28 bg-ca-sky-light">
-            <div class="page-container">
-                <div class="flex flex-col gap-20 mb-6 md:mb-12" id="blog-section"></div>
-                <div class="text-white text-center">
-                    <button 
-                        class="w-10 h-10 rounded-md font-medium bg-emerald-700 paginate" 
-                        type="button"
-                    >
-                        1
-                    </button>
-                    <button 
-                        class="w-10 h-10 rounded-md font-medium bg-emerald-700 paginate" 
-                        type="button"
-                    >
-                        2
-                    </button>
-                </div>
-            </div>
+            <div class="page-container" id="blog-section"></div>
         </section>
     </main>
     <footer class="pt-8 md:pt-12 bg-ca-sky-light">

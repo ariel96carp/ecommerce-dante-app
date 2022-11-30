@@ -1,6 +1,7 @@
-const setPaginate = (activePage, items, createCard, mainElement) => {
+const setPaginate = (activePage, items, createCard) => {
+    const dataGrid = document.getElementById('data-grid')
     const paginateButtons = document.querySelectorAll('.paginate')
-    const sectionElement = mainElement.parentElement.parentElement
+    const sectionElement = dataGrid.parentElement.parentElement
     const header = document.querySelector('header')
     const headerStyles = getComputedStyle(header)
     for (let button of paginateButtons) {
@@ -18,7 +19,7 @@ const setPaginate = (activePage, items, createCard, mainElement) => {
                     const card = createCard(item)
                     fragment.appendChild(card)
                 }) 
-                mainElement.replaceChildren(fragment)
+                dataGrid.replaceChildren(fragment)
             }
         })
     }
