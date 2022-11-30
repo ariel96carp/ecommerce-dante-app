@@ -7,7 +7,7 @@ const createProductCard = (product) => {
     const productPrice = templateHTML.querySelector('.price')
     const productRating = templateHTML.querySelector('.rating')
     productLink.href = `details.html?id=${product.id}`
-    productImage.src = product.url
+    productImage.src = new URL(`/img/${product.url}`, import.meta.url).href
     productImage.loading = 'lazy'
     productEnteprise.textContent = product.enterprise 
     productName.textContent = product.name
@@ -15,7 +15,7 @@ const createProductCard = (product) => {
     productRating.replaceChildren()
     for (let i = 0; i < product.reviews; i++) {
         const star = document.createElement('img')
-        star.src = `${new URL('../../img/estrella.png', import.meta.url).href}`
+        star.src = new URL('../../img/estrella.png', import.meta.url).href
         star.loading = 'lazy'
         star.alt = 'Star'
         star.classList.add('w-3')

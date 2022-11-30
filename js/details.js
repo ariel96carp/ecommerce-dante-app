@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             detailsMainImage.src = product.url
             for (let i = 0; i < 4; i++) {
                 if (i !== 0) {
-                    detailsAltImages[i].src = `${new URL(`../img/c${i + 1}.jpg`, import.meta.url).href}`
+                    detailsAltImages[i].src = new URL(`../img/c${i + 1}.jpg`, import.meta.url).href
                 } else {
                     detailsAltImages[0].src = product.url
                 }
@@ -131,7 +131,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 case idParam !== null:
                     container.insertAdjacentHTML(
                         'beforeend', `${
-                            idParam !== ""
+                            idParam !== ''
                             ? `<p>The article "${idParam}" was not found.</p>`
                             : '<p>The searched article was not found.</p>'
                         }`
