@@ -41,12 +41,12 @@ window.addEventListener('DOMContentLoaded', async () => {
                 })
             }
             detailsBanner.className = 'grid lg:grid-cols-[repeat(2,1fr)] content-center gap-12 h-full sm:w-[80%] mx-auto'
-            detailsMainImage.src = product.url
+            detailsMainImage.src = new URL(`/img/${product.url}`, import.meta.url).href
             for (let i = 0; i < 4; i++) {
                 if (i !== 0) {
                     detailsAltImages[i].src = new URL(`../img/c${i + 1}.jpg`, import.meta.url).href
                 } else {
-                    detailsAltImages[0].src = product.url
+                    detailsAltImages[0].src = new URL(`/img/${product.url}`, import.meta.url).href
                 }
                 detailsAltImages[i].loading = 'lazy'
             }
@@ -76,7 +76,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                     const productImage = alertTemplate.querySelector('.image')
                     productName.textContent = product
                     subtotal.textContent = `$${(price * quantity).toFixed(2)}`
-                    productImage.src = img
+                    productImage.src = new URL(`/img/${img}`, import.meta.url).href
                     const alertClon = alertTemplate.cloneNode(true)
                     const prevAlert = document.getElementById('alert')
                     if (prevAlert) mainSection.removeChild(prevAlert)

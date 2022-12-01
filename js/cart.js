@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const saleSubtotal = rowTemplate.querySelector('.subtotal')
             productId.textContent = sale.id
             productSize.textContent = SIZES[sale.size]
-            productImage.src = sale.url
+            productImage.src = new URL(`/img/${sale.url}`, import.meta.url).href
             productName.textContent = sale.name
             productPrice.textContent = `$${sale.price.toFixed(2)}`
             productQuantity.value = sale.quantity
@@ -167,7 +167,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     const successTemplate = document.getElementById('success-alert').content
                     const successLogo = successTemplate.querySelector('.logo')
                     const successPayment = successTemplate.querySelector('.payment')
-                    successLogo.src = `${new URL('../img/logo2.png', import.meta.url).href}`
+                    successLogo.src = new URL('/img/logo2.png', import.meta.url).href
                     successPayment.textContent = `You paid $${saleTotals} in an installment of: $${saleTotals.toFixed(2)}`
                     const successClon = successTemplate.cloneNode(true)
                     status.replaceChildren(successClon)

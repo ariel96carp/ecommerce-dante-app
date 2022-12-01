@@ -2,3 +2,5 @@
 /node_modules
 # production
 /dist
+# Local Netlify folder
+.netlify

@@ -1,5 +1,5 @@
 const getData = (dataRequested) => new Promise((resolve) => {
-    const API_ENDPOINT = dataRequested === 'products' ? '/json/products.json' : '/json/articles.json'
+    const API_ENDPOINT = dataRequested === 'products' ? '/api/products' : '/api/articles'
     const responseBody = { data: [ ] }
     // EMULATE DELAY IN API CALL
     setTimeout(async () => {

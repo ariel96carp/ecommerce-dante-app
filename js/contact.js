@@ -15,8 +15,8 @@ window.addEventListener('DOMContentLoaded', () => {
             const successTemplate = document.getElementById('success-alert').content
             const successCheck = successTemplate.querySelector('.check-image')
             const successLogo = successTemplate.querySelector('.logo')
-            successCheck.src = `${new URL('../img/404-tick.png', import.meta.url).href}`
-            successLogo.src = `${new URL('../img/logo.png', import.meta.url).href}`
+            successCheck.src = new URL('/img/404-tick.png', import.meta.url).href
+            successLogo.src = new URL('/img/logo.png', import.meta.url).href
             const successClon = successTemplate.cloneNode(true)
             status.replaceChildren(successClon)
             messageForm.reset() 
