@@ -13,8 +13,12 @@ npm i
 ```
 
 3. Run this repository on local environment.
-```bash
+~~```bash
 npm run dev
+```~~
+*[update]* In order to be able to fetch data locally, you must run the script:
+```bash
+npm run netlify-dev
 ```
 
 4. *[optional]* You can build a dist with the command:
