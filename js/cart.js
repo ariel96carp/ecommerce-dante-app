@@ -2,6 +2,7 @@ import onDeleteClick from './utils/onDeleteClick'
 import initialState from './utils/initialState'
 import closeModal from './utils/closeModal'
 import setCart from './utils/setCart'
+import updateState from './utils/updateState'
 
 window.addEventListener('DOMContentLoaded', () => {
     const VALID_COUPONS = [ 'B4sdED', '5Rl8f', 'LFs92', 'R46Ej' ]
@@ -98,7 +99,7 @@ window.addEventListener('DOMContentLoaded', () => {
         renderTable(Object.fromEntries(newState))
         renderTotals(Object.fromEntries(newState))
         setCart(Object.fromEntries(newState))
-        localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+        updateState(Object.fromEntries(newState))
     })
     couponForm.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -123,7 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
             })
             renderTotals(Object.fromEntries(newState))
             renderCouponSubmit(Object.fromEntries(newState))
-            localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+            updateState(Object.fromEntries(newState))
             couponForm.reset()
         }
         else {
@@ -163,7 +164,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     renderCouponSubmit(initialState)
                     renderTotals(initialState)
                     setCart(initialState)
-                    localStorage.setItem('products', JSON.stringify(initialState))
+                    updateState(initialState)
                     const successTemplate = document.getElementById('success-alert').content
                     const successLogo = successTemplate.querySelector('.logo')
                     const successPayment = successTemplate.querySelector('.payment')

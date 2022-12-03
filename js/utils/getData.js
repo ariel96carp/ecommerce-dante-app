@@ -5,10 +5,15 @@ const getData = (dataRequested) => new Promise((resolve) => {
     setTimeout(async () => {
         try {
             const response = await fetch(API_ENDPOINT)
-            const data = await response.json()
-            responseBody.data.push(...data)
-        } catch (e) {
-            responseBody.error = e
+            if (response.status !== 200) {
+                responseBody.error = 'The server encountered an unexpected condition that prevented it from fulfilling the request.'  
+            } 
+            else {
+                const data = await response.json()
+                responseBody.data.push(...data)
+            } 
+        } catch(e) {
+            responseBody.error = e.message
         } finally {
             resolve(responseBody)
         }

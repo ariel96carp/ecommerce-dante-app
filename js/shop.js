@@ -2,6 +2,7 @@ import createProductCard from './utils/createProductCard'
 import setPaginate from './utils/setPaginate'
 import setStatus from './utils/setStatus'
 import getData from './utils/getData'
+import updateState from './utils/updateState'
 
 window.addEventListener('DOMContentLoaded', async () => {
     const state = JSON.parse(localStorage.getItem('products'))
@@ -41,7 +42,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             })
             renderProducts(featuredProducts, Object.fromEntries(newState))
             setPaginate(activePage, Object.fromEntries(newState).products, createProductCard)
-            localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+            updateState(Object.fromEntries(newState))
         }
     }
 })

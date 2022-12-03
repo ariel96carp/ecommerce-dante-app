@@ -3,6 +3,7 @@ import createProductCard from './utils/createProductCard'
 import setCart from './utils/setCart'
 import setStatus from './utils/setStatus'
 import getData from './utils/getData'
+import updateState from './utils/updateState'
 
 window.addEventListener('DOMContentLoaded', async () => {
     const state = JSON.parse(localStorage.getItem('products'))
@@ -122,7 +123,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                     img: requestedProduct.url
                 })
                 setCart(Object.fromEntries(newState))
-                localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+                updateState(Object.fromEntries(newState))
                 detailsForm.reset()
             })
         } 
@@ -161,7 +162,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             })
             getProductAndRender(idParam, Object.fromEntries(newState), detailsSection)
             renderProducts(featuredProducts, Object.fromEntries(newState))
-            localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+            updateState(Object.fromEntries(newState))
         }
     }
 })

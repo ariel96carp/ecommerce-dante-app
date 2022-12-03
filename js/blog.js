@@ -1,6 +1,7 @@
 import setPaginate from './utils/setPaginate'
 import getData from './utils/getData'
 import setStatus from './utils/setStatus'
+import updateState from './utils/updateState'
 
 window.addEventListener('DOMContentLoaded', async () => {
     const state = JSON.parse(localStorage.getItem('products'))
@@ -53,7 +54,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             })
             renderBlogs(blogSection, Object.fromEntries(newState))
             setPaginate(activePage, Object.fromEntries(newState).articles, createBlogCard)
-            localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+            updateState(Object.fromEntries(newState))
         }
     }
 })

@@ -1,6 +1,7 @@
 import createProductCard from './utils/createProductCard'
 import getData from './utils/getData'
 import setStatus from './utils/setStatus'
+import updateState from './utils/updateState'
 
 window.addEventListener('DOMContentLoaded', async () => {
     const state = JSON.parse(localStorage.getItem('products'))
@@ -36,7 +37,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             })
             renderFilteredProducts(featuredProducts, 'featured', Object.fromEntries(newState))
             renderFilteredProducts(arrivedProducts, 'arrived', Object.fromEntries(newState))
-            localStorage.setItem('products', JSON.stringify(Object.fromEntries(newState)))
+            updateState(Object.fromEntries(newState))
         }
     }
 })

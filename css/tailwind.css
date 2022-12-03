@@ -27,7 +27,7 @@
         }
 
         .feature-card{
-            @apply bg-white shadow-sm border border-gray-300 rounded-md py-6 px-4 text-center hover:shadow-lg;
+            @apply bg-white shadow-sm border border-gray-300 rounded-md py-6 px-4 text-center pointer-fine:hover:shadow-lg;
         }
 
         .feature-text{
@@ -43,7 +43,7 @@
         }
 
         .product-banner-btn{
-            @apply py-2 px-5 border-2 border-white group-hover:bg-emerald-700 group-hover:border-emerald-700 transition-colors;
+            @apply py-2 px-5 border-2 border-white pointer-fine:group-hover:bg-emerald-700 pointer-fine:group-hover:border-emerald-700 transition-colors;
         }
 
         .blog-card{

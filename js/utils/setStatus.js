@@ -1,10 +1,10 @@
-import getLoadingMessage from "./getLoadingMessage"
-
 const setStatus = (messageContainers, status) => {
     switch(status) {
         case 'loading':
             messageContainers.forEach((container) => {
-                const statusMessage = getLoadingMessage()
+                const statusMessage = document.createElement('p')
+                statusMessage.textContent = 'Loading data...'
+                statusMessage.className = 'text-left font-normal status'
                 container.insertAdjacentElement('beforeend', statusMessage)
             })
             break
