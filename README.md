@@ -16,7 +16,7 @@ npm i
 ```bash
 npm run dev
 ```
-***[update]*** In order to be able to fetch data locally, you must run the script:
+***[update]*** __In order to be able to fetch data locally, you must run the script:__
 ```bash
 npm run netlify-dev
 ```
