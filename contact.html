@@ -8,37 +8,48 @@
     <link rel="stylesheet" href="./css/tailwind.css">
 </head>
 <body>
-    <template id="loader">
-        <div 
-            class="w-28 h-28 rounded-full border-2 border-t-2 border-t-sky-400 border-gray-400 animate-spin"
-        ></div>
-    </template>
     <template id="success-alert">
         <div 
-            class="w-full sm:w-[70%] md:w-[50%] lg:w-[35%] bg-white rounded-md shadow-md p-10 text-gray-500 relative animate-translate-slow"
+            class="rounded-md bg-white overflow-hidden sm:w-[60%] md:w-[50%] lg:w-[30%] animate-translate-slow"
         >
-            <img alt="Cara Logo" class="mb-10 logo">
-            <div class="text-center">
-                <h2 class="text-5xl font-medium tracking-wide mb-2">Thank you!</h2>
-                <p class="text-lg mb-12">We've received your message and will get back to you within 24 hours.</p>
+            <div class="bg-lime-300 p-8 text-white text-center">
+                <h3 class="uppercase text-xl">Success</h3>
+            </div>
+            <div class="p-8 text-lg text-gray-500 flex flex-col justify-center text-center">
+                <h3 class="mb-6">
+                    We've received your message and will get back to you within 24 hours.
+                </h3>
                 <button 
-                    type="button" 
-                    class="bg-[#6fd649] text-white font-medium p-2 rounded-sm w-full shadow-md"
+                    class="bg-lime-300 rounded-full text-white py-2 shadow-xl"
                     id="modal-button"
                 >
-                    OK
+                    Continue
                 </button>
             </div>
-            <img 
-                alt="Check" 
-                class="absolute bottom-full left-1/2 w-24 check-image"
-            >
         </div>
     </template>
     <template id="cart-quantity">
         <div 
             class="absolute bottom-[70%] left-[80%] bg-red-400 w-4 h-4 text-xs text-white rounded-full text-center quantity"
         ></div>
+    </template>
+    <template id="email-submission">
+        <div 
+            class="rounded-md bg-white overflow-hidden sm:w-[60%] md:w-[50%] lg:w-[30%] animate-translate-slow"
+        >
+            <div class="bg-lime-300 p-8 text-white text-center">
+                <h3 class="uppercase text-xl">Success</h3>
+            </div>
+            <div class="p-8 text-lg text-gray-500 flex flex-col justify-center text-center">
+                <h3 class="mb-6">Congratulations! Your email has been submitted.</h3>
+                <button 
+                    class="bg-lime-300 rounded-full text-white py-2 shadow-xl"
+                    id="modal-button"
+                >
+                    Continue
+                </button>
+            </div>
+        </div>
     </template>
     <header class="fixed top-0 left-0 w-full h-[var(--header-size)] z-40 bg-ca-sky-light shadow-md">
         <div class="page-container flex justify-between items-center h-full">
@@ -367,10 +378,18 @@
                             <span class="text-amber-500">special offers.</span>
                         </p>
                     </div>
-                    <form action="#" class="flex items-center sm:w-[90%] lg:w-[80%] md:justify-self-end">
+                    <form 
+                        action="#" 
+                        class="flex items-center sm:w-[90%] lg:w-[80%] md:justify-self-end"
+                        autocomplete="off"
+                        method="POST"
+                        id="email-form"
+                    >
                         <input 
-                            type="text" 
+                            type="email" 
+                            name="email"
                             placeholder="Your email address" 
+                            required
                             class="py-3 px-4 rounded-tl-md rounded-bl-md outline-none grow"
                         >
                         <input 

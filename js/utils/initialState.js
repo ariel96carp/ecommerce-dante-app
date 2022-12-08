@@ -5,7 +5,8 @@ const initalState = {
     discount: {
         active: false,
         rate: '25%'
-    }
+    },
+    emails: []
 }
 
 export default initalState

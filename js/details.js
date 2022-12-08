@@ -4,6 +4,7 @@ import setCart from './utils/setCart'
 import setStatus from './utils/setStatus'
 import getData from './utils/getData'
 import updateState from './utils/updateState'
+import setEmailSubmission from './utils/setEmailSubmission'
 
 window.addEventListener('DOMContentLoaded', async () => {
     const state = JSON.parse(localStorage.getItem('products'))
@@ -69,9 +70,9 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const productSize = parseInt(target.size.value) 
                 const productQuantity = parseInt(target.quantity.value) 
                 const createBuyAlert = ({ product, price, quantity, img }) => {
-                    if (Timeout.exists('alertTimeout')) Timeout.clear('alertTimeout')
+                    if (Timeout.exists('buyTimeout')) Timeout.clear('buyTimeout')
                     const mainSection = document.querySelector('main')
-                    const alertTemplate = document.getElementById('buy-alert').content
+                    const alertTemplate = document.getElementById('alert').content
                     const productName = alertTemplate.querySelector('.name')
                     const subtotal = alertTemplate.querySelector('.subtotal')
                     const productImage = alertTemplate.querySelector('.image')
@@ -79,10 +80,10 @@ window.addEventListener('DOMContentLoaded', async () => {
                     subtotal.textContent = `$${(price * quantity).toFixed(2)}`
                     productImage.src = new URL(`/img/${img}`, import.meta.url).href
                     const alertClon = alertTemplate.cloneNode(true)
-                    const prevAlert = document.getElementById('alert')
+                    const prevAlert = document.getElementById('buy-alert')
                     if (prevAlert) mainSection.removeChild(prevAlert)
                     mainSection.appendChild(alertClon)
-                    Timeout.create('alertTimeout', () => {
+                    Timeout.create('buyTimeout', () => {
                         mainSection.removeChild(mainSection.lastElementChild)
                     }, 4000)
                 }
@@ -165,4 +166,5 @@ window.addEventListener('DOMContentLoaded', async () => {
             updateState(Object.fromEntries(newState))
         }
     }
+    setEmailSubmission()
 })

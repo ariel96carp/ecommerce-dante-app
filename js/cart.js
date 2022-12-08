@@ -3,6 +3,7 @@ import initialState from './utils/initialState'
 import closeModal from './utils/closeModal'
 import setCart from './utils/setCart'
 import updateState from './utils/updateState'
+import getLoader from './utils/getLoader'
 
 window.addEventListener('DOMContentLoaded', () => {
     const VALID_COUPONS = [ 'B4sdED', '5Rl8f', 'LFs92', 'R46Ej' ]
@@ -156,9 +157,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 const saleTotals = getTotals(updatedState)
                 formModal.classList.toggle('show-modal')
                 const status = formModal.querySelector('.status')
-                const loaderTemplate = document.getElementById('loader').content
-                const loaderClon = loaderTemplate.cloneNode(true)
-                status.replaceChildren(loaderClon)
+                const loader = getLoader()
+                status.replaceChildren(loader)
                 setTimeout(() => {
                     renderTable(initialState)
                     renderCouponSubmit(initialState)

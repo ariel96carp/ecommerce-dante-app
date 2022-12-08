@@ -102,10 +102,10 @@
             class="absolute bottom-[70%] left-[80%] bg-red-400 w-4 h-4 text-xs text-white rounded-full text-center quantity"
         ></div>
     </template>
-    <template id="buy-alert">
+    <template id="alert">
         <div 
             class="bg-emerald-500 rounded-md fixed right-4 bottom-4 py-4 px-6 w-[70%] sm:w-1/2 md:w-[35%] lg:w-[25%] text-white z-30 animate-alert-translate"
-            id="alert"
+            id="buy-alert"
         >
             <h3 class="font-medium border-b mb-3">Added product:</h3>
             <div class="md:text-sm flex justify-between">
@@ -114,6 +114,24 @@
                     <p class="subtotal"></p>
                 </div>
                 <img alt="Product" class="w-10 image" />
+            </div>
+        </div>
+    </template>
+    <template id="email-submission">
+        <div 
+            class="rounded-md bg-white overflow-hidden sm:w-[60%] md:w-[50%] lg:w-[30%] animate-translate-slow"
+        >
+            <div class="bg-lime-300 p-8 text-white text-center">
+                <h3 class="uppercase text-xl">Success</h3>
+            </div>
+            <div class="p-8 text-lg text-gray-500 flex flex-col justify-center text-center">
+                <h3 class="mb-6">Congratulations! Your email has been submitted.</h3>
+                <button 
+                    class="bg-lime-300 rounded-full text-white py-2 shadow-xl"
+                    id="modal-button"
+                >
+                    Continue
+                </button>
             </div>
         </div>
     </template>
@@ -242,6 +260,12 @@
         </div>
     </header>
     <main>
+        <div 
+            class="fixed top-0 left-0 w-full h-[100vh] bg-black/75 z-50 opacity-0 pointer-events-none" 
+            id="form-modal"
+        >
+            <div class="page-container flex justify-center items-center h-full status"></div>
+        </div>
         <section class="py-8 md:py-12 bg-ca-sky-light">
             <div class="page-container h-full" id="details-section"></div>
         </section>
@@ -263,10 +287,18 @@
                             <span class="text-amber-500">special offers.</span>
                         </p>
                     </div>
-                    <form action="#" class="flex items-center sm:w-[90%] lg:w-[80%] md:justify-self-end">
+                    <form 
+                        action="#" 
+                        class="flex items-center sm:w-[90%] lg:w-[80%] md:justify-self-end"
+                        autocomplete="off"
+                        method="POST"
+                        id="email-form"
+                    >
                         <input 
-                            type="text" 
+                            type="email" 
+                            name="email"
                             placeholder="Your email address" 
+                            required
                             class="py-3 px-4 rounded-tl-md rounded-bl-md outline-none grow"
                         >
                         <input 

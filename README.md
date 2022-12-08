@@ -16,7 +16,7 @@ npm i
 ```bash
 npm run dev
 ```
-***[update]*** __In order to be able to fetch data locally, you must run the script:__
+***[UPDATE]*** __In order to be able to fetch data locally, you must run the script:__
 ```bash
 npm run netlify-dev
 ```
@@ -34,7 +34,7 @@ npm run production
 ![Overview](./img/ecommerce-dante-app.netlify.app_details.html_id%3DDFSF(1).png)
 
 ## Usage
-![Overview](./img/ecommerce-dante-app.netlify.app_cart.html.png)
+![Usage](./img/ecommerce-dante-app.netlify.app_cart.html.png)
 In the "Apply coupon" section the valid coupons are: **B4sdED, 5Rl8f, LFs92, R46Ej**.
 
 ## Deploy

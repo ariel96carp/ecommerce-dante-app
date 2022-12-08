@@ -3,6 +3,7 @@ import setPaginate from './utils/setPaginate'
 import setStatus from './utils/setStatus'
 import getData from './utils/getData'
 import updateState from './utils/updateState'
+import setEmailSubmission from './utils/setEmailSubmission'
 
 window.addEventListener('DOMContentLoaded', async () => {
     const state = JSON.parse(localStorage.getItem('products'))
@@ -45,4 +46,5 @@ window.addEventListener('DOMContentLoaded', async () => {
             updateState(Object.fromEntries(newState))
         }
     }
+    setEmailSubmission()
 })
