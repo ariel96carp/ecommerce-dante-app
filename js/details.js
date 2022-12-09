@@ -7,7 +7,7 @@ import updateState from './utils/updateState'
 import setEmailSubmission from './utils/setEmailSubmission'
 
 window.addEventListener('DOMContentLoaded', async () => {
-    const state = JSON.parse(localStorage.getItem('products'))
+    const state = JSON.parse(localStorage.getItem('ecommerce'))
     const URLParams = new URLSearchParams(window.location.search)
     const idParam = URLParams.get('id')
     const detailsSection = document.getElementById('details-section')
@@ -64,7 +64,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             renderDetails(requestedProduct, container)
             const detailsForm = document.getElementById('details-form')
             detailsForm.addEventListener('submit', (e) => {
-                const updatedState = JSON.parse(localStorage.getItem('products'))
+                const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
                 e.preventDefault()
                 const target = e.target
                 const productSize = parseInt(target.size.value) 

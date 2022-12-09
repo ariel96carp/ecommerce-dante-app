@@ -12,7 +12,7 @@ const setEmailSubmission = () => {
         const message = document.createElement('div')
         const mainSection = document.querySelector('main')
         const prevAlert = document.getElementById('email-alert')
-        message.className = 'bg-red-400 p-3 fixed top-3 right-3 rounded-md z-40 md:text-sm max-w-[200px] sm:max-w-[300px] animate-alert-translate'
+        message.className = 'bg-red-400 p-3 fixed top-3 right-3 rounded-md z-40 md:text-sm max-w-[200px] sm:max-w-[300px] animate-alert-translate break-words'
         message.textContent = `The email ${email} has already been subscribed.`
         message.id = 'email-alert'
         if (prevAlert) mainSection.removeChild(prevAlert)
@@ -22,11 +22,11 @@ const setEmailSubmission = () => {
         }, 4000)
     }
     emailForm.addEventListener('submit', (e) => {
-        e.preventDefault()
-        const updatedState = JSON.parse(localStorage.getItem('products'))
+        const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
         const submittedEmails = updatedState.emails
         const target = e.target
         const email = target.email.value
+        e.preventDefault()
         if (!(submittedEmails.find((submittedEmail) => submittedEmail === email.trim()))) {
             const newState = Object.entries(updatedState).map(([ key, value ]) => {
                 switch(true) {

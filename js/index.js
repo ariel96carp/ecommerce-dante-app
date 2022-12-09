@@ -5,7 +5,7 @@ import updateState from './utils/updateState'
 import setEmailSubmission from './utils/setEmailSubmission'
 
 window.addEventListener('DOMContentLoaded', async () => {
-    const state = JSON.parse(localStorage.getItem('products'))
+    const state = JSON.parse(localStorage.getItem('ecommerce'))
     const featuredProducts = document.getElementById('featured-products')
     const arrivedProducts = document.getElementById('arrived-products')
     const renderFilteredProducts = (container, filter, { products }) => {

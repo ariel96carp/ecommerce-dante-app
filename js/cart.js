@@ -8,7 +8,7 @@ import getLoader from './utils/getLoader'
 window.addEventListener('DOMContentLoaded', () => {
     const VALID_COUPONS = [ 'B4sdED', '5Rl8f', 'LFs92', 'R46Ej' ]
     const SIZES = [ 'XXL', 'XL', 'Small', 'Large' ]
-    const state = JSON.parse(localStorage.getItem('products'))
+    const state = JSON.parse(localStorage.getItem('ecommerce'))
     const couponForm = document.getElementById('coupon-form')
     const formModal = document.getElementById('form-modal')
     const tableContainer = document.getElementById('table-container')
@@ -83,7 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
     setMaxTableOnResponsive()
     closeModal(formModal) 
     onDeleteClick('.remove', (e) => {
-        const updatedState = JSON.parse(localStorage.getItem('products'))
+        const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
         const idCell = e.target.closest('td').nextElementSibling
         const productSize = idCell.nextElementSibling.textContent
         const productId = idCell.textContent
@@ -108,7 +108,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const target = e.target
         const givenCoupon = target.coupon.value
         if (VALID_COUPONS.find((coupon) => coupon === givenCoupon.trim())) {
-            const updatedState = JSON.parse(localStorage.getItem('products'))
+            const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
             const newState = Object.entries(updatedState).map(([ key, value ]) => {
                 switch(true) {
                     case key === 'discount':
@@ -137,7 +137,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }) 
     document.addEventListener('click', (e) => {
-        const updatedState = JSON.parse(localStorage.getItem('products'))
+        const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
         const target = e.target
         const salesButton = document.getElementById('sales-button')
         const getTotals = ({ sales, discount }) => {

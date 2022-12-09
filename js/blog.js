@@ -4,7 +4,7 @@ import setStatus from './utils/setStatus'
 import updateState from './utils/updateState'
 
 window.addEventListener('DOMContentLoaded', async () => {
-    const state = JSON.parse(localStorage.getItem('products'))
+    const state = JSON.parse(localStorage.getItem('ecommerce'))
     const blogSection = document.getElementById('blog-section')
     let activePage = 1
     const createBlogCard = (article) => {

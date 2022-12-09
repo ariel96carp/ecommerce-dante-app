@@ -1,3 +1,3 @@
-const updateState = (newState) => localStorage.setItem('products', JSON.stringify(newState))
+const updateState = (newState) => localStorage.setItem('ecommerce', JSON.stringify(newState))
 
 export default updateState
