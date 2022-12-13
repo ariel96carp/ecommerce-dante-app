@@ -1,4 +1,3 @@
-import onDeleteClick from './utils/onDeleteClick'
 import initialState from './utils/initialState'
 import closeModal from './utils/closeModal'
 import setCart from './utils/setCart'
@@ -77,12 +76,25 @@ window.addEventListener('DOMContentLoaded', () => {
             tableContainer.removeAttribute('style')
         }
     }
+    const onDeleteRow = (selector, handler) => {
+        document.addEventListener('click', (e) => {
+            const elements = document.querySelectorAll(selector)
+            const path = e.composedPath()
+            path.forEach((node) => {
+                elements.forEach((element) => {
+                    if (node === element) {
+                        handler.call(element, e)
+                    }
+                })
+            })
+        }), true
+    }
     renderTable(state)
     renderTotals(state)
     renderCouponSubmit(state)
     setMaxTableOnResponsive()
     closeModal(formModal) 
-    onDeleteClick('.remove', (e) => {
+    onDeleteRow('.remove', (e) => {
         const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
         const idCell = e.target.closest('td').nextElementSibling
         const productSize = idCell.nextElementSibling.textContent

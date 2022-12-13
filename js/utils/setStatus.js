@@ -11,13 +11,13 @@ const setStatus = (messageContainers, status) => {
         case 'fulfilled':
             messageContainers.forEach((container) => {
                 const statusMessage = container.querySelector('.status')
-                container.removeChild(statusMessage)
+                if (statusMessage) container.removeChild(statusMessage)
             })
             break
         case 'rejected':
             messageContainers.forEach((container) => {
                 const statusMessage = container.querySelector('.status')
-                statusMessage.textContent = 'An error occurred. Please try it again.'
+                if (statusMessage) statusMessage.textContent = 'An error occurred. Please try it again.'
             })
             break
         default:
