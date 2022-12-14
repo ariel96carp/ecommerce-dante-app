@@ -27,11 +27,12 @@ npm run production
 ```
 
 ## Overview
-![Overview](./img/ecommerce-dante-app.netlify.app_(1).png)
+<img align="center" src="./img/ecommerce-dante-app.netlify.app_(1).png" alt="Overview" />
+
 ![Overview](./img/ecommerce-dante-app.netlify.app_2.png)
 ![Overview](./img/ecommerce-dante-app.netlify.app_contact.html.png)
 ![Overview](./img/localhost_5173_shop.html.png)
-![Overview](./img/ecommerce-dante-app.netlify.app_details.html_id%3DDFSF(1).png)
+<img align="center" src="./img/ecommerce-dante-app.netlify.app_details.html_id%3DDFSF(1).png" alt="Overview" />
 
 ## Usage
 ![Usage](./img/ecommerce-dante-app.netlify.app_cart.html.png)
