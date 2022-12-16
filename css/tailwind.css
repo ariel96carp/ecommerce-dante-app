@@ -106,3 +106,7 @@ body{
 .number{
     transform: translate(-50%, -50%);
 }
+
+.cart-table:not(:has(+ button)){
+    @apply mb-12 sm:mb-16 md:mb-20;
+}

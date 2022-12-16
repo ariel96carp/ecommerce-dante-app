@@ -1,7 +1,7 @@
 const getData = (requestedData) => new Promise((resolve) => {
     const API_ENDPOINT = requestedData === 'products' ? '/api/products' : '/api/articles'
     const responseBody = { data: [ ] }
-    // EMULATE DELAY IN API CALL
+    // EMULATE DELAY IN API CALL (4s)
     setTimeout(async () => {
         try {
             const response = await fetch(API_ENDPOINT)

@@ -10,9 +10,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const state = JSON.parse(localStorage.getItem('ecommerce'))
     const couponForm = document.getElementById('coupon-form')
     const formModal = document.getElementById('form-modal')
-    const tableContainer = document.getElementById('table-container')
-    const renderTable = ({ sales }) => {
-        const salesTable = document.getElementById('sales-table')
+    const renderRows = ({ sales }) => {
+        const salesBody = document.getElementById('sales-body')
         const rowTemplate = document.getElementById('sale-row').content
         const fragment = document.createDocumentFragment()
         sales.forEach((sale) => {
@@ -33,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const templateClon = rowTemplate.cloneNode(true)
             fragment.appendChild(templateClon)
         })
-        salesTable.replaceChildren(fragment)
+        salesBody.replaceChildren(fragment)
     }
     const renderTotals = ({ discount, sales }) => {
         const totalsContainer = document.getElementById('totals-container')
@@ -68,7 +67,21 @@ window.addEventListener('DOMContentLoaded', () => {
             couponSubmit.classList.remove('opacity-50', 'cursor-auto')
         }
     }
+    const renderEmptyButton = ({ sales }) => {
+        const BUTTON_ID = 'delete-cart'
+        const salesContainer = document.getElementById('sales-container')
+        const prevButton = document.getElementById(BUTTON_ID)
+        if (sales.length === 0 && prevButton) salesContainer.removeChild(prevButton)
+        if (sales.length > 0 && !prevButton) {
+            const deleteButton = document.createElement('button')
+            deleteButton.textContent = 'Empty Cart'
+            deleteButton.className = 'bg-red-600 text-white rounded-sm py-2 px-5 cursor-pointer mt-6 mb-12 sm:mb-16 md:mb-20'
+            deleteButton.id = BUTTON_ID
+            salesContainer.insertBefore(deleteButton, salesContainer.children[1])
+        }
+    }
     const setMaxTableOnResponsive = () => {
+        const tableContainer = document.getElementById('table-container')
         const smallBp = matchMedia('(max-width: 480px)')
         if (smallBp.matches) {
             tableContainer.style.maxWidth = `${document.body.clientWidth}px` 
@@ -89,7 +102,8 @@ window.addEventListener('DOMContentLoaded', () => {
             })
         }), true
     }
-    renderTable(state)
+    renderRows(state)
+    renderEmptyButton(state)
     renderTotals(state)
     renderCouponSubmit(state)
     setMaxTableOnResponsive()
@@ -109,7 +123,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     return [ key, value ]
                 }
         })
-        renderTable(Object.fromEntries(newState))
+        renderRows(Object.fromEntries(newState))
+        renderEmptyButton(Object.fromEntries(newState))
         renderTotals(Object.fromEntries(newState))
         setCart(Object.fromEntries(newState))
         updateState(Object.fromEntries(newState))
@@ -148,6 +163,28 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 2000)
         }
     }) 
+    // CLICK LISTENER ON EMPTY BUTTON
+    document.addEventListener('click', (e) => {
+        const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
+        const target = e.target
+        const emptyCart = document.getElementById('delete-cart')
+        if (target === emptyCart) {
+            const newState = Object.entries(updatedState).map(([ key, value ]) => {
+                switch(true) {
+                    case key === 'sales':
+                        return [ key, value = [] ]
+                    default: 
+                        return [ key, value ]
+                }
+            })
+            renderRows(Object.fromEntries(newState))
+            renderEmptyButton(Object.fromEntries(newState))
+            renderTotals(Object.fromEntries(newState))
+            setCart(Object.fromEntries(newState))
+            updateState(Object.fromEntries(newState))
+        }
+    })
+    // CLICK LISTENER ON CHECKOUT BUTTON
     document.addEventListener('click', (e) => {
         const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
         const target = e.target
@@ -172,7 +209,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 const loader = getLoader()
                 status.replaceChildren(loader)
                 setTimeout(() => {
-                    renderTable(initialState)
+                    renderRows(initialState)
+                    renderEmptyButton(initialState)
                     renderCouponSubmit(initialState)
                     renderTotals(initialState)
                     setCart(initialState)
