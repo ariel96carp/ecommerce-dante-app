@@ -75,7 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (sales.length > 0 && !prevButton) {
             const deleteButton = document.createElement('button')
             deleteButton.textContent = 'Empty Cart'
-            deleteButton.className = 'bg-red-600 text-white rounded-sm py-2 px-5 cursor-pointer mt-6 mb-12 sm:mb-16 md:mb-20'
+            deleteButton.className = 'bg-red-700 text-white rounded-sm py-2 px-5 cursor-pointer mt-6 mb-12 sm:mb-16 md:mb-20'
             deleteButton.id = BUTTON_ID
             salesContainer.insertBefore(deleteButton, salesContainer.children[1])
         }
@@ -121,7 +121,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     ]
                 default:
                     return [ key, value ]
-                }
+            }
         })
         renderRows(Object.fromEntries(newState))
         renderEmptyButton(Object.fromEntries(newState))
