@@ -6,7 +6,7 @@ import getLoader from './utils/getLoader'
 
 window.addEventListener('DOMContentLoaded', () => {
     const VALID_COUPONS = [ 'B4sdED', '5Rl8f', 'LFs92', 'R46Ej' ]
-    const SIZES = [ 'XXL', 'XL', 'Small', 'Large' ]
+    const CLOTHING_SIZES = [ 'XXL', 'XL', 'Small', 'Large' ]
     const state = JSON.parse(localStorage.getItem('ecommerce'))
     const couponForm = document.getElementById('coupon-form')
     const formModal = document.getElementById('form-modal')
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const productQuantity = rowTemplate.querySelector('.quantity')
             const saleSubtotal = rowTemplate.querySelector('.subtotal')
             productId.textContent = sale.id
-            productSize.textContent = SIZES[sale.size]
+            productSize.textContent = CLOTHING_SIZES[sale.size]
             productImage.src = new URL(`/img/${sale.url}`, import.meta.url).href
             productName.textContent = sale.name
             productPrice.textContent = `$${sale.price.toFixed(2)}`
@@ -117,7 +117,7 @@ window.addEventListener('DOMContentLoaded', () => {
             switch(true) {
                 case key === 'sales':
                     return [ key, value.filter(
-                        (sale) => !(sale.id === productId && sale.size === SIZES.indexOf(productSize)))
+                        (sale) => !(sale.id === productId && sale.size === CLOTHING_SIZES.indexOf(productSize)))
                     ]
                 default:
                     return [ key, value ]
@@ -163,7 +163,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 2000)
         }
     }) 
-    // CLICK LISTENER ON EMPTY BUTTON
+    // CLICK LISTENER IN EMPTY BUTTON
     document.addEventListener('click', (e) => {
         const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
         const target = e.target
@@ -184,7 +184,7 @@ window.addEventListener('DOMContentLoaded', () => {
             updateState(Object.fromEntries(newState))
         }
     })
-    // CLICK LISTENER ON CHECKOUT BUTTON
+    // CLICK LISTENER IN CHECKOUT BUTTON
     document.addEventListener('click', (e) => {
         const updatedState = JSON.parse(localStorage.getItem('ecommerce'))
         const target = e.target
