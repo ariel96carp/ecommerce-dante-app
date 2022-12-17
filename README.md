@@ -38,4 +38,4 @@ npm run production
 In the "Apply coupon" section the valid coupons are: **B4sdED, 5Rl8f, LFs92, R46Ej**.
 
 ## Deploy
-<a href="https://ecommerce-dante-app.netlify.app" target="_black">https://ecommerce-dante-app.netlify.app</a>
+[https://ecommerce-dante-app.netlify.app](https://ecommerce-dante-app.netlify.app)
