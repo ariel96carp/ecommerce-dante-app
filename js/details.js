@@ -71,12 +71,12 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const productQuantity = parseInt(target.quantity.value) 
                 const createBuyAlert = ({ product, price, quantity, img }) => {
                     const TIMEOUT_ID = 'buyTimeout'
-                    if (Timeout.exists(TIMEOUT_ID)) Timeout.clear(TIMEOUT_ID)
                     const mainSection = document.querySelector('main')
                     const alertTemplate = document.getElementById('alert').content
                     const productName = alertTemplate.querySelector('.name')
                     const subtotal = alertTemplate.querySelector('.subtotal')
                     const productImage = alertTemplate.querySelector('.image')
+                    if (Timeout.exists(TIMEOUT_ID)) Timeout.clear(TIMEOUT_ID)
                     productName.textContent = product
                     subtotal.textContent = `$${(price * quantity).toFixed(2)}`
                     productImage.src = new URL(`/img/${img}`, import.meta.url).href

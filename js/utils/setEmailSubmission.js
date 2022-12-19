@@ -9,10 +9,10 @@ const setEmailSubmission = () => {
     const status = formModal.querySelector('.status')
     const createEmailAlert = ({ email }) => {
         const TIMEOUT_ID = 'emailTimeout'
-        if (Timeout.exists(TIMEOUT_ID)) Timeout.clear(TIMEOUT_ID)
         const message = document.createElement('div')
         const mainSection = document.querySelector('main')
         const prevAlert = document.getElementById('email-alert')
+        if (Timeout.exists(TIMEOUT_ID)) Timeout.clear(TIMEOUT_ID)
         message.className = 'bg-red-400 p-3 fixed top-3 right-3 rounded-md z-40 md:text-sm max-w-[200px] sm:max-w-[300px] animate-alert-translate break-words'
         message.textContent = `The email ${email} has already been subscribed.`
         message.id = 'email-alert'
