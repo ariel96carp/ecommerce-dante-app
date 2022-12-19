@@ -70,7 +70,8 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const productSize = parseInt(target.size.value) 
                 const productQuantity = parseInt(target.quantity.value) 
                 const createBuyAlert = ({ product, price, quantity, img }) => {
-                    if (Timeout.exists('buyTimeout')) Timeout.clear('buyTimeout')
+                    const TIMEOUT_ID = 'buyTimeout'
+                    if (Timeout.exists(TIMEOUT_ID)) Timeout.clear(TIMEOUT_ID)
                     const mainSection = document.querySelector('main')
                     const alertTemplate = document.getElementById('alert').content
                     const productName = alertTemplate.querySelector('.name')
@@ -83,7 +84,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                     const prevAlert = document.getElementById('buy-alert')
                     if (prevAlert) mainSection.removeChild(prevAlert)
                     mainSection.appendChild(alertClon)
-                    Timeout.create('buyTimeout', () => {
+                    Timeout.create(TIMEOUT_ID, () => {
                         mainSection.removeChild(mainSection.lastElementChild)
                     }, 4000)
                 }

@@ -8,7 +8,8 @@ const setEmailSubmission = () => {
     const formModal = document.getElementById('form-modal')
     const status = formModal.querySelector('.status')
     const createEmailAlert = ({ email }) => {
-        if (Timeout.exists('emailTimeout')) Timeout.clear('emailTimeout')
+        const TIMEOUT_ID = 'emailTimeout'
+        if (Timeout.exists(TIMEOUT_ID)) Timeout.clear(TIMEOUT_ID)
         const message = document.createElement('div')
         const mainSection = document.querySelector('main')
         const prevAlert = document.getElementById('email-alert')
@@ -17,7 +18,7 @@ const setEmailSubmission = () => {
         message.id = 'email-alert'
         if (prevAlert) mainSection.removeChild(prevAlert)
         mainSection.appendChild(message)
-        Timeout.create('emailTimeout', () => {
+        Timeout.create(TIMEOUT_ID, () => {
             mainSection.removeChild(mainSection.lastElementChild)
         }, 4000)
     }
