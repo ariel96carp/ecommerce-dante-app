@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "production": "vite build",
-    "netlify-dev": "netlify dev"
+    "netlify:dev": "netlify dev"
   },
   "keywords": [],
   "author": "",

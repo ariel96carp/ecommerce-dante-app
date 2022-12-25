@@ -18,7 +18,7 @@ npm run dev
 ```
 ***[UPDATE]*** __In order to be able to fetch data locally, you must run the script:__
 ```bash
-npm run netlify-dev
+npm run netlify:dev
 ```
 
 4. *[optional]* You can build a dist with the command:
